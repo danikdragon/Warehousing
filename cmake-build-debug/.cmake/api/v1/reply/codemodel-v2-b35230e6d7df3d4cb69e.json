@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Warehousing",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Warehousing::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Warehousing-Debug-4897ebc35a7034f421c9.json",
+					"name" : "Warehousing",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Warehousing_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Warehousing_autogen-Debug-8e53ccb6f7018c0b9bf7.json",
+					"name" : "Warehousing_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Warehousing_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Warehousing_autogen_timestamp_deps-Debug-f1e06387d42a1cb9ccf2.json",
+					"name" : "Warehousing_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "B:/c++/\u041c\u043e\u0438 \u043f\u0440\u043e\u0435\u043a\u0442\u044b/Warehousing/cmake-build-debug",
+		"source" : "B:/c++/\u041c\u043e\u0438 \u043f\u0440\u043e\u0435\u043a\u0442\u044b/Warehousing"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

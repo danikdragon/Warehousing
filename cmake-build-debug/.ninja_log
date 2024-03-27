@@ -1,0 +1,30 @@
+# ninja log v5
+3	3146	7332400920179255	build.ninja	80f2bb4e4da4ab7f
+17	174	7332399162434211	B:/c++/Мои проекты/Warehousing/cmake-build-debug/Warehousing_autogen/mocs_compilation.cpp	895db7e293eab4d8
+17	174	7332399162434211	Warehousing_autogen/timestamp	895db7e293eab4d8
+17	174	7332399162434211	B:/c++/Мои проекты/Warehousing/cmake-build-debug/Warehousing_autogen/timestamp	895db7e293eab4d8
+176	894	7332399169617349	CMakeFiles/Warehousing.dir/Warehousing_autogen/mocs_compilation.cpp.obj	783059d2566df75e
+17	174	7332399162434211	Warehousing_autogen/mocs_compilation.cpp	895db7e293eab4d8
+6344	6761	7332399228196657	Warehousing.exe	b68503ee29de58f
+218	6344	7332399224095338	CMakeFiles/Warehousing.dir/main.cpp.obj	a537ed925c601346
+17	172	7332404307827689	Warehousing_autogen/timestamp	895db7e293eab4d8
+17	172	7332404307827689	Warehousing_autogen/mocs_compilation.cpp	895db7e293eab4d8
+17	172	7332404307827689	B:/c++/Мои проекты/Warehousing/cmake-build-debug/Warehousing_autogen/timestamp	895db7e293eab4d8
+17	172	7332404307827689	B:/c++/Мои проекты/Warehousing/cmake-build-debug/Warehousing_autogen/mocs_compilation.cpp	895db7e293eab4d8
+175	654	7332404312646924	CMakeFiles/Warehousing.dir/Warehousing_autogen/mocs_compilation.cpp.obj	783059d2566df75e
+214	5177	7332404357854557	CMakeFiles/Warehousing.dir/main.cpp.obj	a537ed925c601346
+5177	5553	7332404361535937	Warehousing.exe	b68503ee29de58f
+17	170	7332404668874599	Warehousing_autogen/timestamp	895db7e293eab4d8
+17	170	7332404668874599	Warehousing_autogen/mocs_compilation.cpp	895db7e293eab4d8
+17	170	7332404668874599	B:/c++/Мои проекты/Warehousing/cmake-build-debug/Warehousing_autogen/timestamp	895db7e293eab4d8
+17	170	7332404668874599	B:/c++/Мои проекты/Warehousing/cmake-build-debug/Warehousing_autogen/mocs_compilation.cpp	895db7e293eab4d8
+173	664	7332404673839369	CMakeFiles/Warehousing.dir/Warehousing_autogen/mocs_compilation.cpp.obj	783059d2566df75e
+210	5904	7332404726218403	CMakeFiles/Warehousing.dir/main.cpp.obj	a537ed925c601346
+5904	6326	7332404730347516	Warehousing.exe	b68503ee29de58f
+15	161	7332404815745731	Warehousing_autogen/timestamp	895db7e293eab4d8
+15	161	7332404815745731	Warehousing_autogen/mocs_compilation.cpp	895db7e293eab4d8
+15	161	7332404815745731	B:/c++/Мои проекты/Warehousing/cmake-build-debug/Warehousing_autogen/timestamp	895db7e293eab4d8
+15	161	7332404815745731	B:/c++/Мои проекты/Warehousing/cmake-build-debug/Warehousing_autogen/mocs_compilation.cpp	895db7e293eab4d8
+163	604	7332404820184872	CMakeFiles/Warehousing.dir/Warehousing_autogen/mocs_compilation.cpp.obj	783059d2566df75e
+199	5028	7332404864421714	CMakeFiles/Warehousing.dir/main.cpp.obj	a537ed925c601346
+5028	5363	7332404867678665	Warehousing.exe	b68503ee29de58f
