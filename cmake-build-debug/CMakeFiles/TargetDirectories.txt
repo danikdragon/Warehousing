@@ -1,5 +1,0 @@
-B:/c++/Мои проекты/Warehousing/cmake-build-debug/CMakeFiles/Warehousing.dir
-B:/c++/Мои проекты/Warehousing/cmake-build-debug/CMakeFiles/edit_cache.dir
-B:/c++/Мои проекты/Warehousing/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-B:/c++/Мои проекты/Warehousing/cmake-build-debug/CMakeFiles/Warehousing_autogen_timestamp_deps.dir
-B:/c++/Мои проекты/Warehousing/cmake-build-debug/CMakeFiles/Warehousing_autogen.dir
