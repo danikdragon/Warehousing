@@ -12,21 +12,19 @@ qt_add_executable(appWarehousing
     main.cpp
 )
 
+
 qt_add_qml_module(appWarehousing
     URI Warehousing
     VERSION 1.0
-    QML_FILES Main.qml
+    QML_FILES Main.qml CustomButton.qml Goods.qml
 )
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
+
 set_target_properties(appWarehousing PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appWarehousing
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+        MACOSX_BUNDLE TRUE
+        WIN32_EXECUTABLE TRUE
 )
 
 target_link_libraries(appWarehousing
