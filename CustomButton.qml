@@ -10,6 +10,7 @@ MouseArea{
         id: bg
         anchors.fill: parent
         color: colorButton
+        clip: true
         Text{
             font.pixelSize: fontSize
             color: colorText

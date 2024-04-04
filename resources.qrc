@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource>
+        <file>../Warehousing/Main.qml</file>
+        <file>../Warehousing/Goods.qml</file>
+        <file>../Warehousing/CustomButton.qml</file>
+    </qresource>
+</RCC>

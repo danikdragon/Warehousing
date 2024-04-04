@@ -15,6 +15,9 @@ Item{
                                         "Блок питнания: AeroCool 1000wt\n"+
                                         "Память: m2me 1000gb, ssd 4tb"
     property int value: 0
+
+    signal ordering()
+
     width: 340
     height: 560
 
@@ -81,7 +84,9 @@ Item{
                 Layout.fillWidth: true
                 Layout.preferredWidth: parent.width * 0.3
                 textValue: "Заказать"
-
+                onClicked:{
+                    ordering();
+                }
             }
             CustomButton {
                 id: minus
