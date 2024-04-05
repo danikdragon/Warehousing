@@ -41,7 +41,7 @@ Item{
             height: 25
             textValue: "Удалить"
             onClicked: {
-                parent.visible = false;
+                delete root;
             }
         }
         ColumnLayout{

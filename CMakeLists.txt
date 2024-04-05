@@ -13,13 +13,13 @@ qt_add_resources(RESOURCES_ADDED ${RESOURCES})
 qt_standard_project_setup()
 
 qt_add_executable(appWarehousing
-    main.cpp ${RESOURCES_ADDED}
+        source/main.cpp ${RESOURCES_ADDED}
 )
 
 qt_add_qml_module(appWarehousing
     URI Warehousing
     VERSION 1.0
-    QML_FILES Main.qml CustomButton.qml Goods.qml
+    QML_FILES QML/Main.qml QML/CustomButton.qml QML/Goods.qml QML/MenuButton.qml QML/Page1.qml
 )
 
 set_target_properties(appWarehousing PROPERTIES

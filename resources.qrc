@@ -1,7 +1,9 @@
 <!DOCTYPE RCC><RCC version="1.0">
     <qresource>
-        <file>../Warehousing/Main.qml</file>
-        <file>../Warehousing/Goods.qml</file>
-        <file>../Warehousing/CustomButton.qml</file>
+        <file>../Warehousing/QML/Main.qml</file>
+        <file>../Warehousing/QML/Goods.qml</file>
+        <file>../Warehousing/QML/CustomButton.qml</file>
+        <file>../Warehousing/QML/MenuButton.qml</file>
+        <file>../Warehousing/QML/Page1.qml</file>
     </qresource>
 </RCC>
