@@ -5,7 +5,7 @@ MouseArea{
     property color colorButton: "#000000"
     property color colorText: "#E9E9E9"
     property int fontSize: 12
-    property string textValue: "Click me"
+    property string textValue: ""
     Rectangle{
         id: bg
         anchors.fill: parent

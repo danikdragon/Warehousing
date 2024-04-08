@@ -4,7 +4,6 @@ project(Warehousing VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_POLICY_DEFAULT_CMP0068 NEW)
 set(RESOURCES resources.qrc)
 
 find_package(Qt6 6.6 REQUIRED COMPONENTS Quick Core Qml)
@@ -19,7 +18,13 @@ qt_add_executable(appWarehousing
 qt_add_qml_module(appWarehousing
     URI Warehousing
     VERSION 1.0
-    QML_FILES QML/Main.qml QML/CustomButton.qml QML/Goods.qml QML/MenuButton.qml QML/Page1.qml
+        QML_FILES
+        QML/Main.qml
+        QML/CustomButton.qml
+        QML/Goods.qml
+        QML/MenuButton.qml
+        QML/Page1.qml
+        QML/CustomTextArea.qml
 )
 
 set_target_properties(appWarehousing PROPERTIES
