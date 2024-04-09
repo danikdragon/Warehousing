@@ -6,5 +6,6 @@
         <file>../Warehousing/QML/MenuButton.qml</file>
         <file>../Warehousing/QML/Page1.qml</file>
         <file>../Warehousing/QML/CustomTextArea.qml</file>
+        <file>../Warehousing/QML/CreateGoods.qml</file>
     </qresource>
 </RCC>

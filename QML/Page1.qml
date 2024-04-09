@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Page{
-    function createGoods(path = "B:\\c++\\MyProject\\Warehousing\\Pc.png", title = "title", descript = "descript", newValue){
+    function createGoods(path = "file:///C:\\Users\\Даниил\\Pictures\\300px-Маск_шаблон_1.jpg", title = "Title", descript = "Descript", newValue = 0){
         goods.model.append({
             myPath: path,
             myTitle: title,
@@ -12,13 +12,13 @@ Page{
         });
     }
 
-    id: page1
     RowLayout{
         anchors.fill: parent
         Item{
             Layout.preferredWidth: goods.width * 0.019
         }
         GridView {
+
             id: goods
             Layout.preferredWidth: parent.width * 0.8
             Layout.fillWidth: true
@@ -32,7 +32,9 @@ Page{
             model: ListModel {
                 id: myModel
             }
+
             delegate: Goods {
+                anchors.topMargin: 10
                 imageSource: myPath
                 titleText: myTitle
                 descriptionText: myDescript

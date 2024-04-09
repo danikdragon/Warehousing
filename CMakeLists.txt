@@ -14,7 +14,6 @@ qt_standard_project_setup()
 qt_add_executable(appWarehousing
         source/main.cpp ${RESOURCES_ADDED}
 )
-
 qt_add_qml_module(appWarehousing
     URI Warehousing
     VERSION 1.0
@@ -25,6 +24,7 @@ qt_add_qml_module(appWarehousing
         QML/MenuButton.qml
         QML/Page1.qml
         QML/CustomTextArea.qml
+        QML/CreateGoods.qml
 )
 
 set_target_properties(appWarehousing PROPERTIES

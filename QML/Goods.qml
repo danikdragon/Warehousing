@@ -7,7 +7,7 @@ Item{
     readonly property color whiteButton: "#9E9E9E"
     readonly property color blackText: "#000000"
     readonly property color whiteText: "#E9E9E9"
-    property string imageSource: "B:\\c++\\MyProject\\Warehousing\\Pc.png"
+    property string imageSource: "file:///B:/c++/MyProject//Warehousing//Pc.png"
     property string titleText: "Игровой компьютер 1"
     property string descriptionText: "Видеокарта: RTX 4090ti gigabyte\n"+
                                         "Процессор: intel core i9 10500\n"+
@@ -20,18 +20,24 @@ Item{
 
     width: 340
     height: 560
-
+    anchors{
+        topMargin: 20
+    }
+    id: root
     Rectangle{
         anchors.fill: parent
         color: "#E9E9E9"
         Image{
             id: imageGoods
-            source: "file:///" + imageSource
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.horizontalCenter
-            fillMode: Image.PreserveAspectFit
+            height: 320
+            source: imageSource
+            anchors{
+                left: parent.left
+                right: parent.right
+                top: parent.top
+                bottom: parent.horizontalCenter
+            }
+            fillMode: Image.Stretch
             smooth: true
         }
         CustomButton {
@@ -41,7 +47,10 @@ Item{
             height: 25
             textValue: "Удалить"
             onClicked: {
-                delete root;
+                goods.model.remove(index);
+                root.visible = false;
+                root.destroy();
+                root.visible = true;
             }
         }
         ColumnLayout{
@@ -53,19 +62,28 @@ Item{
             anchors.right: parent.right
 
             Text{
-                anchors.left: parent.left-25
-                anchors.right: parent.right-25
-                Layout.leftMargin: 25
-                Layout.rightMargin: 25
+                id: titleId
+                wrapMode: Text.Wrap
+                anchors{
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: 25
+                    rightMargin: 25
+                }
                 font.bold: true
                 text: titleText
                 font.pixelSize: 18
             }
             Text{
-                anchors.left: parent.left-25
-                anchors.right: parent.right-25
-                Layout.leftMargin: 25
-                Layout.rightMargin: 25
+                wrapMode: Text.Wrap
+                anchors{
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: 25
+                    rightMargin: 25
+                    top: titleId.bottom
+                    topMargin:10
+                }
                 text: descriptionText
                 font.pixelSize: 16
             }
