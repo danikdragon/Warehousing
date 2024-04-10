@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Page{
-    function createGoods(path = "file:///C:\\Users\\Даниил\\Pictures\\300px-Маск_шаблон_1.jpg", title = "Title", descript = "Descript", newValue = 0){
+    function createGoods(path = "qrc:/Warehousing/Pc.png", title = " ", descript = " ", newValue = 0){
         goods.model.append({
             myPath: path,
             myTitle: title,
@@ -40,7 +40,9 @@ Page{
                 descriptionText: myDescript
                 value: myValue
             }
-            ScrollBar.vertical: ScrollBar { }
+            ScrollBar.vertical: ScrollBar {
+                snapMode : ScrollBar.NoSnap
+            }
         }
     }
 }

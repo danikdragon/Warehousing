@@ -7,5 +7,6 @@
         <file>../Warehousing/QML/Page1.qml</file>
         <file>../Warehousing/QML/CustomTextArea.qml</file>
         <file>../Warehousing/QML/CreateGoods.qml</file>
+        <file>../Warehousing/Pc.png</file>
     </qresource>
 </RCC>

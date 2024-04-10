@@ -18,6 +18,26 @@ Item{
 
     signal ordering()
 
+    Timer {
+        property string action : '+'
+        id: timer
+        interval: 500
+        repeat: true
+        running: false
+        onTriggered: {
+            if(action === '-'){
+                if (value !== 0) {
+                    value--;
+                }
+            } else{
+                value++;
+            }
+            if (interval != 50){
+                interval -= 50;
+            }
+        }
+    }
+
     width: 340
     height: 560
     anchors{
@@ -119,6 +139,14 @@ Item{
                     if(value != 0)
                         value--;
                 }
+                onPressed: {
+                    timer.action = '-'
+                    timer.running = true
+                }
+                onReleased: {
+                    timer.running = false
+                    timer.interval = 500;
+                }
             }
             Rectangle {
                 height: parent.height
@@ -155,6 +183,14 @@ Item{
                 fontSize: fontSize + 10
                 onClicked: {
                     value++;
+                }
+                onPressed: {
+                    timer.action = '+'
+                    timer.running = true
+                }
+                onReleased: {
+                    timer.running = false
+                    timer.interval = 500;
                 }
             }
             CustomButton {
