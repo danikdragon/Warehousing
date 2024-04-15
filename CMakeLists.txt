@@ -28,6 +28,7 @@ qt_add_qml_module(appWarehousing
         QML/Goods.qml
         QML/MainPage.qml
         QML/CreateGoods.qml
+        QML/SuppliersPage.qml
 )
 set_target_properties(appWarehousing PROPERTIES
         MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
