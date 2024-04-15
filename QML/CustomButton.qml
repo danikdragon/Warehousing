@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 
 MouseArea{
+    width: 100
+    height: 50
     property color colorButton: "#000000"
     property color colorText: "#E9E9E9"
     property int fontSize: 12

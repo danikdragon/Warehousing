@@ -7,13 +7,13 @@ import QtQuick.Effects
 
 Page {
     id: root
-    property string hrefFromImg: "qrc:/Warehousing/Pc.png"
+    property string hrefFromImg: "qrc:/Warehousing/Images/Pc.png"
     property int valueGoods: 0
 
     function cleareAll() {
         titleText.text = null;
         descriptText.text = null;
-        hrefFromImg = "qrc:/Warehousing/Pc.png";
+        hrefFromImg = "qrc:/Warehousing/Images/Pc.png";
         valueGoods = 0;
     }
 
@@ -59,14 +59,12 @@ Page {
     ColumnLayout {
         anchors.fill: parent
         Text {
-            id: titlePage
-
+            id:titlePage
             Layout.fillWidth: true
             font.bold: true
             font.pixelSize: 40
             horizontalAlignment: Text.AlignHCenter
             text: "Создание карточки"
-
             anchors {
                 top: parent.top
             }
@@ -74,185 +72,185 @@ Page {
 
         RowLayout {
             Layout.fillWidth: true
-            anchors.centerIn: parent
+            anchors{
+                top: titlePage.bottom
+                horizontalCenter: titlePage.horizontalCenter
+            }
+            Rectangle {
+                anchors.centerIn: parent
+                anchors.top: parent.top
+                color: "#E9E9E9"
+                height: 560
+                width: 340
+                MultiEffect {
+                    source: parent
+                    anchors.fill: parent
 
-            Item {
-                Rectangle {
-                    anchors.centerIn: parent
-                    anchors.top: parent.top
-                    color: "#E9E9E9"
-                    height: 560
-                    width: 340
-                    MultiEffect {
-                        source: parent
-                        anchors.fill: parent
+                    shadowColor: "#000000"
+                    shadowEnabled: true
+                    shadowBlur: 20
+                    shadowVerticalOffset: 5
+                    shadowHorizontalOffset: 10
+                }
+                Image {
+                    id: imageGoods
 
-                        shadowColor: "#000000"
-                        shadowEnabled: true
-                        shadowBlur: 20
-                        shadowVerticalOffset: 5
-                        shadowHorizontalOffset: 10
+                    fillMode: Image.Stretch
+                    height: 320
+                    smooth: true
+                    source: hrefFromImg
+
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
                     }
-                    Image {
-                        id: imageGoods
+                }
+                CustomButton {
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    height: 25
+                    textValue: "Выбор изображения"
+                    width: 150
+                    onClicked: {
+                        fileDialog.open();
+                    }
+                }
+                ColumnLayout {
+                    anchors.bottom: buttonLayout.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: imageGoods.bottom
+                    clip: true
+                    spacing: -20
 
-                        fillMode: Image.Stretch
-                        height: 320
-                        smooth: true
-                        source: hrefFromImg
+                    CustomTextArea {
+                        id: titleText
+
+                        Layout.leftMargin: 25
+                        Layout.rightMargin: 25
+                        font.bold: true
+                        font.pixelSize: 18
+                        maxCharacters: 28
+                        width: parent.width - 50
 
                         anchors {
-                            left: parent.left
-                            right: parent.right
-                            top: parent.top
+                            left: parent.left - 25
+                            right: parent.right - 25
+                        }
+                    }
+                    CustomTextArea {
+                        id: descriptText
+
+                        Layout.leftMargin: 25
+                        Layout.rightMargin: 25
+                        font.pixelSize: 16
+                        height: 125
+                        maxCharacters: 140
+                        placeholderText: "Введите описание"
+                        width: parent.width - 50
+
+                        anchors {
+                            left: parent.left - 25
+                            right: parent.right - 25
+                        }
+                    }
+                }
+                RowLayout {
+                    id: buttonLayout
+
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 40
+                    spacing: 0
+
+                    CustomButton {
+                        id: order
+                        Layout.fillWidth: true
+                        Layout.preferredWidth: parent.width * 0.3
+                        height: parent.height
+                        textValue: "Очистить"
+
+                        onClicked: {
+                            cleareAll();
                         }
                     }
                     CustomButton {
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        height: 25
-                        textValue: "Выбор изображения"
-                        width: 150
+                        Layout.fillWidth: true
+                        Layout.preferredWidth: parent.width * 0.1
+                        colorButton: "#9E9E9E"
+                        colorText: "black"
+                        fontSize: fontSize + 10
+                        height: parent.height
+                        textValue: "-"
+
                         onClicked: {
-                            fileDialog.open();
+                            if (valueGoods !== 0) {
+                                valueGoods--;
+                            }
+                        }
+                        onPressed: {
+                            timer.action = '-'
+                            timer.running = true
+                        }
+                        onReleased: {
+                            timer.running = false
+                            timer.interval = 500;
                         }
                     }
-                    ColumnLayout {
-                        anchors.bottom: buttonLayout.top
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.top: imageGoods.bottom
-                        clip: true
-                        spacing: -20
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredWidth: parent.width * 0.2
+                        color: "#9E9E9E"
+                        height: parent.height
 
-                        CustomTextArea {
-                            id: titleText
-
-                            Layout.leftMargin: 25
-                            Layout.rightMargin: 25
-                            font.bold: true
-                            font.pixelSize: 18
-                            maxCharacters: 28
-                            width: parent.width - 50
-
-                            anchors {
-                                left: parent.left - 25
-                                right: parent.right - 25
-                            }
+                        Text {
+                            anchors.top: parent.top
+                            color: "#000000"
+                            height: parent.height / 2
+                            horizontalAlignment: Text.AlignHCenter
+                            text: "Кол-во"
+                            width: parent.width
                         }
-                        CustomTextArea {
-                            id: descriptText
-
-                            Layout.leftMargin: 25
-                            Layout.rightMargin: 25
-                            font.pixelSize: 16
-                            height: 125
-                            maxCharacters: 140
-                            placeholderText: "Введите описание"
-                            width: parent.width - 50
-
-                            anchors {
-                                left: parent.left - 25
-                                right: parent.right - 25
-                            }
+                        Text {
+                            anchors.bottom: parent.bottom
+                            color: "#000000"
+                            height: parent.height / 2
+                            horizontalAlignment: Text.AlignHCenter
+                            text: valueGoods
+                            width: parent.width
                         }
                     }
-                    RowLayout {
-                        id: buttonLayout
+                    CustomButton {
+                        Layout.fillWidth: true
+                        Layout.preferredWidth: parent.width * 0.1
+                        colorButton: "#9E9E9E"
+                        colorText: "black"
+                        fontSize: fontSize + 10
+                        height: parent.height
+                        textValue: "+"
 
-                        anchors.bottom: parent.bottom
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        height: 40
-                        spacing: 0
-
-                        CustomButton {
-                            id: order
-                            Layout.fillWidth: true
-                            Layout.preferredWidth: parent.width * 0.3
-                            height: parent.height
-                            textValue: "Очистить"
-
-                            onClicked: {
-                                cleareAll();
-                            }
+                        onClicked: {
+                            valueGoods++;
                         }
-                        CustomButton {
-                            Layout.fillWidth: true
-                            Layout.preferredWidth: parent.width * 0.1
-                            colorButton: "#9E9E9E"
-                            colorText: "black"
-                            fontSize: fontSize + 10
-                            height: parent.height
-                            textValue: "-"
-
-                            onClicked: {
-                                if (valueGoods !== 0) {
-                                    valueGoods--;
-                                }
-                            }
-                            onPressed: {
-                                timer.action = '-'
-                                timer.running = true
-                            }
-                            onReleased: {
-                                timer.running = false
-                                timer.interval = 500;
-                            }
+                        onPressed: {
+                            timer.action = '+'
+                            timer.running = true
                         }
-                        Rectangle {
-                            Layout.fillWidth: true
-                            Layout.preferredWidth: parent.width * 0.2
-                            color: "#9E9E9E"
-                            height: parent.height
-
-                            Text {
-                                anchors.top: parent.top
-                                color: "#000000"
-                                height: parent.height / 2
-                                horizontalAlignment: Text.AlignHCenter
-                                text: "Кол-во"
-                                width: parent.width
-                            }
-                            Text {
-                                anchors.bottom: parent.bottom
-                                color: "#000000"
-                                height: parent.height / 2
-                                horizontalAlignment: Text.AlignHCenter
-                                text: valueGoods
-                                width: parent.width
-                            }
+                        onReleased: {
+                            timer.running = false
+                            timer.interval = 500;
                         }
-                        CustomButton {
-                            Layout.fillWidth: true
-                            Layout.preferredWidth: parent.width * 0.1
-                            colorButton: "#9E9E9E"
-                            colorText: "black"
-                            fontSize: fontSize + 10
-                            height: parent.height
-                            textValue: "+"
+                    }
+                    CustomButton {
+                        Layout.fillWidth: true
+                        Layout.preferredWidth: parent.width * 0.3
+                        height: parent.height
+                        textValue: "Cоздать"
 
-                            onClicked: {
-                                valueGoods++;
-                            }
-                            onPressed: {
-                                timer.action = '+'
-                                timer.running = true
-                            }
-                            onReleased: {
-                                timer.running = false
-                                timer.interval = 500;
-                            }
-                        }
-                        CustomButton {
-                            Layout.fillWidth: true
-                            Layout.preferredWidth: parent.width * 0.3
-                            height: parent.height
-                            textValue: "Cоздать"
-
-                            onClicked: {
-                                goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods);
-                            }
+                        onClicked: {
+                            goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods);
                         }
                     }
                 }

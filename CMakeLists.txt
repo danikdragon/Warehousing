@@ -2,11 +2,9 @@ cmake_minimum_required(VERSION 3.27)
 project(Warehousing VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-
 include(FetchContent)
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
 FetchContent_MakeAvailable(json)
-
 
 set(RESOURCES resources.qrc)
 find_package(Qt6 6.6 REQUIRED COMPONENTS Quick Core Qml)
@@ -16,19 +14,19 @@ qt_standard_project_setup()
 add_executable(appWarehousing
         source/main.cpp ${RESOURCES_ADDED}
 )
-target_link_libraries(appWarehousing PUBLIC nlohmann_json::nlohmann_json)
 
+target_link_libraries(appWarehousing PUBLIC nlohmann_json::nlohmann_json)
 
 qt_add_qml_module(appWarehousing
     URI Warehousing
     VERSION 1.0
         QML_FILES
         QML/Main.qml
-        QML/CustomButton.qml
-        QML/Goods.qml
         QML/MenuButton.qml
-        QML/Page1.qml
+        QML/CustomButton.qml
         QML/CustomTextArea.qml
+        QML/Goods.qml
+        QML/MainPage.qml
         QML/CreateGoods.qml
 )
 set_target_properties(appWarehousing PROPERTIES
