@@ -10,11 +10,12 @@ Item{
     property string imageSource: "qrc:/Warehousing/Images/Pc.png"
     property string titleText: "Игровой компьютер 1"
     property string descriptionText: "Видеокарта: RTX 4090ti gigabyte\n"+
-                                        "Процессор: intel core i9 10500\n"+
-                                        "ОЗУ: 16gb ddr5\n"+
-                                        "Блок питнания: AeroCool 1000wt\n"+
-                                        "Память: m2me 1000gb, ssd 4tb"
+                                     "Процессор: intel core i9 10500\n"+
+                                     "ОЗУ: 16gb ddr5\n"+
+                                     "Блок питнания: AeroCool 1000wt\n"+
+                                     "Память: m2me 1000gb, ssd 4tb"
     property int value: 0
+    property string nameSupplier: ""
 
     signal ordering()
 

@@ -251,7 +251,6 @@ Page {
                         onClicked: {
                             if(titleText.text !== "" && descriptText.text !== ""){
                                 goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods)
-                                cleareAll()
                             }else{
                                 appAnswer.message("Заполните все данные", true)
                             }

@@ -4,13 +4,24 @@ import QtQuick.Layouts
 
 Page{
     function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0){
-        goods.model.append({
-            myPath: path,
-            myTitle: title,
-            myDescript: descript,
-            myValue: newValue
-        });
-        appAnswer.message("Карточка создана!")
+        var copyrate = false
+        for (var i = 0; i < goods.count; i++) {
+            if(title === goods.model.get(i).myTitle){
+                copyrate = true
+                break
+            }
+        }
+        if(!copyrate){
+            goods.model.append({
+                myPath: path,
+                myTitle: title,
+                myDescript: descript,
+                myValue: newValue
+            });
+            appAnswer.message("Карточка создана!")
+            createGoodsPage.cleareAll()
+        }else
+            appAnswer.message("Такая карточка уже существует!", true);
     }
 
     RowLayout{
