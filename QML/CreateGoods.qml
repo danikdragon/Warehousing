@@ -85,7 +85,6 @@ Page {
                 MultiEffect {
                     source: parent
                     anchors.fill: parent
-
                     shadowColor: "#000000"
                     shadowEnabled: true
                     shadowBlur: 20
@@ -250,7 +249,12 @@ Page {
                         textValue: "Cоздать"
 
                         onClicked: {
-                            goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods);
+                            if(titleText.text !== "" && descriptText.text !== ""){
+                                goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods)
+                                cleareAll()
+                            }else{
+                                appAnswer.message("Заполните все данные", true)
+                            }
                         }
                     }
                 }

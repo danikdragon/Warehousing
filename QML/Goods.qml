@@ -67,6 +67,7 @@ Item{
             height: 25
             textValue: "Удалить"
             onClicked: {
+                appAnswer.message("Удалено!")
                 goods.model.remove(index);
                 root.visible = false;
                 root.destroy();

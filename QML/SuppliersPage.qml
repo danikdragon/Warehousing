@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
 Page{
+    property int fontSize: 16
     ColumnLayout{
         anchors{
             fill: parent
@@ -27,15 +28,15 @@ Page{
             }
             CustomTextArea{
                 id: nameTextArea
-                font.pixelSize: 14
+                font.pixelSize: fontSize
                 Layout.fillWidth: true
                 placeholderText: "Впишите имя"
             }
             CustomTextArea{
                 id: numberTextArea
-                font.pixelSize: 14
+                font.pixelSize: fontSize
                 Layout.fillWidth: true
-                placeholderText: "Впишите номер"
+                placeholderText: "Впишите номер/Данные/Контакты/Адрес"
             }
             CustomButton{
                 Layout.fillWidth: true
@@ -43,14 +44,27 @@ Page{
                 id: createButton
                 onClicked:{
                     if(nameTextArea.text !== "" && numberTextArea.text !== ""){
-                        myList.model.append({
-                            name:nameTextArea.text,
-                            number:numberTextArea.text
-                        });
-                        nameTextArea.text = ""
-                        numberTextArea.text = ""
+                        var copyrate = false
+                        for (var i = 0; i < myList.count; i++) {
+                            if(nameTextArea.text === myList.model.get(i).name){
+                                copyrate = true
+                                break
+                            }
+                        }
+                        if(!copyrate){
+                            myList.model.append({
+                                name:nameTextArea.text,
+                                number:numberTextArea.text
+                            });
+                            nameTextArea.text = ""
+                            numberTextArea.text = ""
+                            appAnswer.message("Поле создано!")
+                        }else{
+                            appAnswer.message("Такой доставщик уже существует", true)
+                        }
+                    }else{
+                        appAnswer.message("Заполните все поля", true)
                     }
-
                 }
             }
         }
@@ -58,20 +72,20 @@ Page{
             clip: true
             id: myList
             Layout.fillWidth: true
+            spacing:10
             anchors{
+                topMargin: 10
                 right: parent.right
                 top: createButtons.bottom
                 bottom: parent.bottom
             }
-            spacing:10
-
             delegate: RowLayout{
                 id: obj
                 width: myList.model.widht
-                height: 50
+                height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                 Rectangle{
                     id: rectName
-                    height: 50
+                    height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                     clip: true
                     width: nameTextArea.width
                     color: "#646464"
@@ -79,27 +93,23 @@ Page{
                         left: page3.left
                     }
                     Text{
-                        color: "white"
+                        padding: 10
+                        id: nameValue
+                        color: "#E9E9E9"
                         text: name
-                        font.pixelSize: 14
+                        font.pixelSize: fontSize
                         wrapMode: TextArea.Wrap
                         width: parent.width
-                        anchors{
-                            margins: 10
-                            centerIn:parent
-                        }
                     }
                 }
-
                 Rectangle{
                     id: spacerRect
                     width: 5
                     anchors.left: rectName.right
                 }
-
                 Rectangle{
                     clip: true
-                    height: 50
+                    height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                     id: rectNumber
                     width: numberTextArea.width
                     color: "#969696"
@@ -107,34 +117,31 @@ Page{
                         left: spacerRect.right
                     }
                     Text{
-                        font.pixelSize: 14
+                        padding: 10
+                        id: numberValue
+                        font.pixelSize: fontSize
                         color: "black"
                         text: number
                         wrapMode: TextArea.Wrap
                         width: parent.width
-                        anchors{
-                            centerIn:parent
-                            margins: 10
-                        }
                     }
                 }
                 CustomButton{
                     Layout.fillWidth: true
                     textValue: "Удалить"
                     width: createButton.width
+                    height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                     anchors{
                         leftMargin:5
                         left: rectNumber.right
                     }
                     onClicked:{
+                        appAnswer.message("Удалено!")
                         myList.model.remove(index);
                     }
                 }
             }
             model: ListModel {}
-            ScrollBar.vertical: ScrollBar {
-                snapMode : ScrollBar.NoSnap
-            }
         }
     }
 }

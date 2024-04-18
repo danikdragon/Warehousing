@@ -13,6 +13,7 @@
         <file>../Warehousing/QML/MainPage.qml</file>
         <file>../Warehousing/QML/CreateGoods.qml</file>
         <file>../Warehousing/QML/SuppliersPage.qml</file>
+        <file>../Warehousing/QML/Answer.qml</file>
 
         <!--Изображения-->
         <file>../Warehousing/Images/Pc.png</file>

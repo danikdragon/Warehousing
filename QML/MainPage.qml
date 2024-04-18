@@ -10,6 +10,7 @@ Page{
             myDescript: descript,
             myValue: newValue
         });
+        appAnswer.message("Карточка создана!")
     }
 
     RowLayout{
@@ -21,14 +22,15 @@ Page{
             id: goods
             Layout.preferredWidth: parent.width * 0.8
             Layout.fillWidth: true
+            cellWidth: 340 + parent.width * 0.019
+            cellHeight: 580
+            flow: GridView.FlowLeftToRight
             anchors{
+                topMargin: 10
                 right: parent.right
                 top: parent.top
                 bottom: parent.bottom
             }
-            cellWidth: 340 + parent.width * 0.019
-            cellHeight: 580
-            flow: GridView.FlowLeftToRight
             model: ListModel {
                 id: myModel
             }

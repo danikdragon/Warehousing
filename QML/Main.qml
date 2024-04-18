@@ -64,9 +64,10 @@ Window {
                     }
                     FileDialog {
                         id: createJson
-                        title: "Выберите файл"
+                        title: "Выберите папку"
+                        fileMode: FileDialog.SaveFile
                         currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                        nameFilters: ["folder"]
+                        nameFilters: [".json"]
                         onAccepted: {
 
                         }
@@ -151,4 +152,5 @@ Window {
         anchors.fill: parent
         visible: false
     }
+    Answer{id: appAnswer}
 }
