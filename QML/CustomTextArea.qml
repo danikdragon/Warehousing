@@ -14,8 +14,8 @@ TextArea {
     property int maxCharacters: 500
     onTextChanged: {
         if (description.length >= maxCharacters) {
-            description.text = description.text.slice(0,-1);
-            description.cursorPosition = maxCharacters-1;
+            description.text = description.text.slice(0, -1);
+            description.cursorPosition = maxCharacters - 1;
         }
     }
     Rectangle {

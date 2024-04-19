@@ -1,21 +1,21 @@
 import QtQuick
 
-Rectangle{
+Rectangle {
     width: log.width
     height: 50
     id: root
     visible: false
-    anchors{
+    anchors {
         right: parent.right
         top: parent.top
         margins: 10
     }
-    Text{
+    Text {
         id: log
         color: "black"
         font.pixelSize: 14
         padding: 10
-        anchors{
+        anchors {
             centerIn: parent
         }
     }
@@ -26,10 +26,11 @@ Rectangle{
             root.visible = false
         }
     }
+
     function message(text = "", isError = false) {
         visible = true
         log.text = text
-        root.color = isError ?  "#D32F2F" : "#4CAF50";
+        root.color = isError ? "#D32F2F" : "#4CAF50";
         timer.start()
     }
 }

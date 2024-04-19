@@ -2,16 +2,16 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-Page{
-    function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0){
+Page {
+    function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0) {
         var copyrate = false
         for (var i = 0; i < goods.count; i++) {
-            if(title === goods.model.get(i).myTitle){
+            if (title === goods.model.get(i).myTitle) {
                 copyrate = true
                 break
             }
         }
-        if(!copyrate){
+        if (!copyrate) {
             goods.model.append({
                 myPath: path,
                 myTitle: title,
@@ -20,13 +20,13 @@ Page{
             });
             appAnswer.message("Карточка создана!")
             createGoodsPage.cleareAll()
-        }else
+        } else
             appAnswer.message("Такая карточка уже существует!", true);
     }
 
-    RowLayout{
+    RowLayout {
         anchors.fill: parent
-        Item{
+        Item {
             Layout.preferredWidth: goods.width * 0.019
         }
         GridView {
@@ -36,7 +36,7 @@ Page{
             cellWidth: 340 + parent.width * 0.019
             cellHeight: 580
             flow: GridView.FlowLeftToRight
-            anchors{
+            anchors {
                 topMargin: 10
                 right: parent.right
                 top: parent.top
@@ -53,7 +53,7 @@ Page{
                 value: myValue
             }
             ScrollBar.vertical: ScrollBar {
-                snapMode : ScrollBar.NoSnap
+                snapMode: ScrollBar.NoSnap
             }
         }
     }

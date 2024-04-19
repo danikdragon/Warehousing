@@ -2,16 +2,16 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
-Page{
+Page {
     property int fontSize: 16
-    ColumnLayout{
-        anchors{
+    ColumnLayout {
+        anchors {
             fill: parent
-            leftMargin:10
-            rightMargin:10
+            leftMargin: 10
+            rightMargin: 10
         }
         Text {
-            id:titlePage
+            id: titlePage
             font.bold: true
             font.pixelSize: 40
             horizontalAlignment: Text.AlignHCenter
@@ -21,78 +21,78 @@ Page{
                 horizontalCenter: parent.horizontalCenter
             }
         }
-        RowLayout{
+        RowLayout {
             id: createButtons
-            anchors{
+            anchors {
                 top: titlePage.bottom
             }
-            CustomTextArea{
+            CustomTextArea {
                 id: nameTextArea
                 font.pixelSize: fontSize
                 Layout.fillWidth: true
                 placeholderText: "Впишите имя"
             }
-            CustomTextArea{
+            CustomTextArea {
                 id: numberTextArea
                 font.pixelSize: fontSize
                 Layout.fillWidth: true
                 placeholderText: "Впишите номер/Данные/Контакты/Адрес"
             }
-            CustomButton{
+            CustomButton {
                 Layout.fillWidth: true
                 textValue: "Cоздать"
                 id: createButton
-                onClicked:{
-                    if(nameTextArea.text !== "" && numberTextArea.text !== ""){
+                onClicked: {
+                    if (nameTextArea.text !== "" && numberTextArea.text !== "") {
                         var copyrate = false
                         for (var i = 0; i < myList.count; i++) {
-                            if(nameTextArea.text === myList.model.get(i).name){
+                            if (nameTextArea.text === myList.model.get(i).name) {
                                 copyrate = true
                                 break
                             }
                         }
-                        if(!copyrate){
+                        if (!copyrate) {
                             myList.model.append({
-                                name:nameTextArea.text,
-                                number:numberTextArea.text
+                                name: nameTextArea.text,
+                                number: numberTextArea.text
                             });
                             nameTextArea.text = ""
                             numberTextArea.text = ""
                             appAnswer.message("Поле создано!")
-                        }else{
+                        } else {
                             appAnswer.message("Такой доставщик уже существует", true)
                         }
-                    }else{
+                    } else {
                         appAnswer.message("Заполните все поля", true)
                     }
                 }
             }
         }
-        ListView{
+        ListView {
             clip: true
             id: myList
             Layout.fillWidth: true
-            spacing:10
-            anchors{
+            spacing: 10
+            anchors {
                 topMargin: 10
                 right: parent.right
                 top: createButtons.bottom
                 bottom: parent.bottom
             }
-            delegate: RowLayout{
+            delegate: RowLayout {
                 id: obj
                 width: myList.model.widht
                 height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
-                Rectangle{
+                Rectangle {
                     id: rectName
                     height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                     clip: true
                     width: nameTextArea.width
                     color: "#646464"
-                    anchors{
+                    anchors {
                         left: page3.left
                     }
-                    Text{
+                    Text {
                         padding: 10
                         id: nameValue
                         color: "#E9E9E9"
@@ -102,21 +102,21 @@ Page{
                         width: parent.width
                     }
                 }
-                Rectangle{
+                Rectangle {
                     id: spacerRect
                     width: 5
                     anchors.left: rectName.right
                 }
-                Rectangle{
+                Rectangle {
                     clip: true
                     height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                     id: rectNumber
                     width: numberTextArea.width
                     color: "#969696"
-                    anchors{
+                    anchors {
                         left: spacerRect.right
                     }
-                    Text{
+                    Text {
                         padding: 10
                         id: numberValue
                         font.pixelSize: fontSize
@@ -126,22 +126,23 @@ Page{
                         width: parent.width
                     }
                 }
-                CustomButton{
+                CustomButton {
                     Layout.fillWidth: true
                     textValue: "Удалить"
                     width: createButton.width
                     height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
-                    anchors{
-                        leftMargin:5
+                    anchors {
+                        leftMargin: 5
                         left: rectNumber.right
                     }
-                    onClicked:{
+                    onClicked: {
                         appAnswer.message("Удалено!")
                         myList.model.remove(index);
                     }
                 }
             }
-            model: ListModel {}
+            model: ListModel {
+            }
         }
     }
 }

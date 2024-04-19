@@ -13,22 +13,24 @@ Window {
     visible: true
     width: 1400
     property string curentOpenFile
-    function undoText(){
+
+    function undoText() {
         sv.pop();
         createId.textValue = "Создать товар";
         suppliersId.textValue = "Поставщики";
     }
-    Rectangle{
-        anchors.fill : parent
+
+    Rectangle {
+        anchors.fill: parent
         color: "#c8c8c8"
     }
-    RowLayout{
+    RowLayout {
         anchors.fill: parent
-        Rectangle{
+        Rectangle {
             id: buttons
             Layout.preferredWidth: (parent.width * 0.2)
             Layout.fillWidth: true
-            anchors{
+            anchors {
                 left: parent.left
                 top: parent.top
                 bottom: parent.bottom
@@ -37,29 +39,29 @@ Window {
             // color: "#DDDDDD"
             color: "#c8c8c8"
 
-            ColumnLayout{
+            ColumnLayout {
                 spacing: 10
                 anchors.fill: parent
                 Rectangle {
                     color: "transparent"
                 }
-                MenuButton{
+                MenuButton {
                     id: createId
                     textValue: "Создать товар"
                     onClicked: {
-                        if(textValue === "Создать товар"){
+                        if (textValue === "Создать товар") {
                             undoText();
                             sv.push(createGoodsPage);
                             textValue = "Назад";
-                        }else{
+                        } else {
                             undoText();
                         }
                     }
                 }
-                MenuButton{
+                MenuButton {
                     id: createTableId
                     textValue: "Создать новую таблицу"
-                    onClicked:{
+                    onClicked: {
                         createJson.open();
                     }
                     FileDialog {
@@ -73,41 +75,41 @@ Window {
                         }
                     }
                 }
-                MenuButton{
+                MenuButton {
                     textValue: "Открыть таблицу"
-                    onClicked:{
+                    onClicked: {
                         openJson.open();
                     }
                     FileDialog {
                         id: openJson
                         title: "Выберите файл"
                         currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                        nameFilters: [ "Data (*.json)"]
+                        nameFilters: ["Data (*.json)"]
                         onAccepted: {
                             curentOpenFile = selectedFile;
                         }
                     }
                 }
-                MenuButton{
+                MenuButton {
                     id: suppliersId
                     textValue: "Поставщики"
                     onClicked: {
-                        if(textValue === "Поставщики"){
+                        if (textValue === "Поставщики") {
                             undoText();
                             sv.push(suppliers);
                             textValue = "Назад";
-                        }else{
+                        } else {
                             undoText();
                         }
                     }
                 }
-                MenuButton{
+                MenuButton {
                     textValue: "Поставки"
                 }
-                MenuButton{
+                MenuButton {
                     textValue: "Категории товаров"
                 }
-                MenuButton{
+                MenuButton {
                     textValue: "Фильтр"
                 }
                 Rectangle {
@@ -142,15 +144,17 @@ Window {
         anchors.fill: parent
         visible: false
     }
-    CreateGoods{
+    CreateGoods {
         id: createGoodsPage
         anchors.fill: parent
         visible: false
     }
-    SuppliersPage{
+    SuppliersPage {
         id: suppliers
         anchors.fill: parent
         visible: false
     }
-    Answer{id: appAnswer}
+    Answer {
+        id: appAnswer
+    }
 }

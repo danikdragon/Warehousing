@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-CustomButton{
+CustomButton {
     anchors.horizontalCenter: parent.horizontalCenter
     Layout.fillWidth: true
     colorButton: "#5A5A5A"

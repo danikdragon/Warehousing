@@ -2,17 +2,17 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-Item{
+Item {
     readonly property color blackButton: "#000000"
     readonly property color whiteButton: "#9E9E9E"
     readonly property color blackText: "#000000"
     readonly property color whiteText: "#E9E9E9"
     property string imageSource: "qrc:/Warehousing/Images/Pc.png"
     property string titleText: "Игровой компьютер 1"
-    property string descriptionText: "Видеокарта: RTX 4090ti gigabyte\n"+
-                                     "Процессор: intel core i9 10500\n"+
-                                     "ОЗУ: 16gb ddr5\n"+
-                                     "Блок питнания: AeroCool 1000wt\n"+
+    property string descriptionText: "Видеокарта: RTX 4090ti gigabyte\n" +
+                                     "Процессор: intel core i9 10500\n" +
+                                     "ОЗУ: 16gb ddr5\n" +
+                                     "Блок питнания: AeroCool 1000wt\n" +
                                      "Память: m2me 1000gb, ssd 4tb"
     property int value: 0
     property string nameSupplier: ""
@@ -20,20 +20,20 @@ Item{
     signal ordering()
 
     Timer {
-        property string action : '+'
+        property string action: '+'
         id: timer
         interval: 500
         repeat: true
         running: false
         onTriggered: {
-            if(action === '-'){
+            if (action === '-') {
                 if (value !== 0) {
                     value--;
                 }
-            } else{
+            } else {
                 value++;
             }
-            if (interval != 50){
+            if (interval != 50) {
                 interval -= 50;
             }
         }
@@ -41,18 +41,18 @@ Item{
 
     width: 340
     height: 560
-    anchors{
+    anchors {
         topMargin: 20
     }
     id: root
-    Rectangle{
+    Rectangle {
         anchors.fill: parent
         color: "#E9E9E9"
-        Image{
+        Image {
             id: imageGoods
             height: 320
             source: imageSource
-            anchors{
+            anchors {
                 left: parent.left
                 right: parent.right
                 top: parent.top
@@ -75,7 +75,7 @@ Item{
                 root.visible = true;
             }
         }
-        ColumnLayout{
+        ColumnLayout {
             clip: true
             spacing: -20
             anchors.top: imageGoods.bottom
@@ -83,10 +83,10 @@ Item{
             anchors.left: parent.left
             anchors.right: parent.right
 
-            Text{
+            Text {
                 id: titleId
                 wrapMode: Text.Wrap
-                anchors{
+                anchors {
                     left: parent.left
                     right: parent.right
                     leftMargin: 25
@@ -96,15 +96,15 @@ Item{
                 text: titleText
                 font.pixelSize: 18
             }
-            Text{
+            Text {
                 wrapMode: Text.Wrap
-                anchors{
+                anchors {
                     left: parent.left
                     right: parent.right
                     leftMargin: 25
                     rightMargin: 25
                     top: titleId.bottom
-                    topMargin:10
+                    topMargin: 10
                 }
                 text: descriptionText
                 font.pixelSize: 16
@@ -124,7 +124,7 @@ Item{
                 Layout.fillWidth: true
                 Layout.preferredWidth: parent.width * 0.3
                 textValue: "Заказать"
-                onClicked:{
+                onClicked: {
                     ordering();
                 }
             }
@@ -138,7 +138,7 @@ Item{
                 textValue: "-"
                 fontSize: fontSize + 10
                 onClicked: {
-                    if(value != 0)
+                    if (value != 0)
                         value--;
                 }
                 onPressed: {
@@ -155,23 +155,23 @@ Item{
                 Layout.fillWidth: true
                 color: whiteButton
                 Layout.preferredWidth: parent.width * 0.2
-                Text{
+                Text {
                     id: uperValue
                     anchors.top: parent.top
-                    text:"Кол-во"
+                    text: "Кол-во"
                     color: blackText
                     horizontalAlignment: Text.AlignHCenter
                     width: parent.width
-                    height: parent.height/2
+                    height: parent.height / 2
                 }
-                Text{
+                Text {
                     id: valueText
                     anchors.bottom: parent.bottom
                     text: value
                     color: blackText
                     horizontalAlignment: Text.AlignHCenter
                     width: parent.width
-                    height: parent.height/2
+                    height: parent.height / 2
                 }
             }
             CustomButton {

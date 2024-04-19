@@ -27,20 +27,20 @@ Page {
     }
 
     Timer {
-        property string action : '+'
+        property string action: '+'
         id: timer
         interval: 500
         repeat: true
         running: false
         onTriggered: {
-            if(action === '-'){
+            if (action === '-') {
                 if (valueGoods !== 0) {
                     valueGoods--;
                 }
-            } else{
+            } else {
                 valueGoods++;
             }
-            if (interval != 50){
+            if (interval != 50) {
                 interval -= 50;
             }
         }
@@ -59,7 +59,7 @@ Page {
     ColumnLayout {
         anchors.fill: parent
         Text {
-            id:titlePage
+            id: titlePage
             Layout.fillWidth: true
             font.bold: true
             font.pixelSize: 40
@@ -72,7 +72,7 @@ Page {
 
         RowLayout {
             Layout.fillWidth: true
-            anchors{
+            anchors {
                 top: titlePage.bottom
                 horizontalCenter: titlePage.horizontalCenter
             }
@@ -249,9 +249,9 @@ Page {
                         textValue: "Cоздать"
 
                         onClicked: {
-                            if(titleText.text !== "" && descriptText.text !== ""){
+                            if (titleText.text !== "" && descriptText.text !== "") {
                                 goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods)
-                            }else{
+                            } else {
                                 appAnswer.message("Заполните все данные", true)
                             }
                         }
