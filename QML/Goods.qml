@@ -52,6 +52,8 @@ Item {
             id: imageGoods
             height: 320
             source: imageSource
+            sourceSize.width: imageGoods.height * 2
+            sourceSize.height: imageGoods.width * 2
             anchors {
                 left: parent.left
                 right: parent.right

@@ -12,7 +12,9 @@ qt_add_resources(RESOURCES_ADDED ${RESOURCES})
 qt_standard_project_setup()
 
 add_executable(appWarehousing
-        source/main.cpp ${RESOURCES_ADDED}
+        main.cpp ${RESOURCES_ADDED}
+        source/Suppliers.cpp
+        include/Suppliers.h
 )
 
 target_link_libraries(appWarehousing PUBLIC nlohmann_json::nlohmann_json)
@@ -44,3 +46,4 @@ target_link_libraries(appWarehousing
         Qt6::Core
         Qt6::Qml
 )
+#add_subdirectory(include)

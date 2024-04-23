@@ -18,7 +18,14 @@ Window {
         sv.pop();
         createId.textValue = "Создать товар";
         suppliersId.textValue = "Поставщики";
+        categoriesButton.textValue = "Категории товаров";
     }
+    // Item {
+    //     focus: true
+    //     Keys.onEscapePressed:{
+    //         undoText()
+    //     }
+    // }
 
     Rectangle {
         anchors.fill: parent
@@ -45,6 +52,49 @@ Window {
                 Rectangle {
                     color: "transparent"
                 }
+
+                RowLayout {
+                    id: searchButton
+                    height: 40
+                    width: width - 5
+                    CustomTextArea{
+                        placeholderText: "Поставщик/Категория\nЗаголовок/Описание"
+                        id: searchText
+                        height: parent.height
+                        Layout.fillWidth: true
+                        maxCharacters: 80
+                        Layout.preferredWidth: parent.width
+                    }
+                    MouseArea{
+                        height: 40
+                        width: 40
+                        onPressed: {
+                            imageSearch.opacity = 0.5
+                            imageSearch.height -= 5
+                            imageSearch.width -= 5
+                        }
+                        onReleased: {
+                            imageSearch.opacity = 1
+                            imageSearch.height += 5
+                            imageSearch.width += 5
+                        }
+                        onClicked:{
+                            //Тут должна быть функция которая будет изменять видимость объектов в гриде и отображать только те где есть какие либо данные
+                            //Или же можно открывать новую таблицу в которую можно добавлять товары
+                        }
+                        Image{
+                            id: imageSearch
+                            source: "qrc:/Warehousing/Images/Search_Button.png"
+                            height: parent.height
+                            width: parent.width
+                            smooth: true
+                            sourceSize.width: parent.height * 2
+                            sourceSize.height: parent.width * 2
+                            anchors.centerIn: parent
+                        }
+                    }
+                }
+
                 MenuButton {
                     id: createId
                     textValue: "Создать товар"
@@ -59,8 +109,39 @@ Window {
                     }
                 }
                 MenuButton {
+                    id: categoriesButton
+                    textValue: "Категории товаров"
+
+                    onClicked:{
+                        if (textValue === "Категории товаров") {
+                            undoText();
+                            sv.push(categoriesPage);
+                            textValue = "Назад";
+                        } else {
+                            undoText();
+                        }
+                    }
+                }
+                MenuButton {
+                    id: suppliersId
+                    textValue: "Поставщики"
+                    onClicked: {
+                        if (textValue === "Поставщики") {
+                            undoText();
+                            sv.push(suppliers);
+                            textValue = "Назад";
+                        } else {
+                            undoText();
+                        }
+                    }
+                }
+                MenuButton {
+                    textValue: "Поставки"
+                }
+
+                MenuButton {
                     id: createTableId
-                    textValue: "Создать новую таблицу"
+                    textValue: "Создать таблицу"
                     onClicked: {
                         createJson.open();
                     }
@@ -89,28 +170,6 @@ Window {
                             curentOpenFile = selectedFile;
                         }
                     }
-                }
-                MenuButton {
-                    id: suppliersId
-                    textValue: "Поставщики"
-                    onClicked: {
-                        if (textValue === "Поставщики") {
-                            undoText();
-                            sv.push(suppliers);
-                            textValue = "Назад";
-                        } else {
-                            undoText();
-                        }
-                    }
-                }
-                MenuButton {
-                    textValue: "Поставки"
-                }
-                MenuButton {
-                    textValue: "Категории товаров"
-                }
-                MenuButton {
-                    textValue: "Фильтр"
                 }
                 Rectangle {
                     Layout.fillHeight: true
@@ -151,6 +210,11 @@ Window {
     }
     SuppliersPage {
         id: suppliers
+        anchors.fill: parent
+        visible: false
+    }
+    Categories{
+        id: categoriesPage
         anchors.fill: parent
         visible: false
     }

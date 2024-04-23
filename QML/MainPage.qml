@@ -42,9 +42,6 @@ Page {
                 top: parent.top
                 bottom: parent.bottom
             }
-            model: ListModel {
-                id: myModel
-            }
             delegate: Goods {
                 anchors.topMargin: 10
                 imageSource: myPath
@@ -54,6 +51,8 @@ Page {
             }
             ScrollBar.vertical: ScrollBar {
                 snapMode: ScrollBar.NoSnap
+            }
+            model: ListModel {
             }
         }
     }

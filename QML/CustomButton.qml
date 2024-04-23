@@ -23,9 +23,11 @@ MouseArea {
     onPressed: {
         bg.opacity = 0.5
         fontSize--
+        goods.interactive = false
     }
     onReleased: {
         bg.opacity = 1
         fontSize++
+        goods.interactive = true
     }
 }

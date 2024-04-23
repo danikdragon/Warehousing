@@ -15,7 +15,7 @@ Page {
             font.bold: true
             font.pixelSize: 40
             horizontalAlignment: Text.AlignHCenter
-            text: "Создание карточки"
+            text: "Поставщики"
             anchors {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
@@ -45,14 +45,14 @@ Page {
                 onClicked: {
                     if (nameTextArea.text !== "" && numberTextArea.text !== "") {
                         var copyrate = false
-                        for (var i = 0; i < myList.count; i++) {
-                            if (nameTextArea.text === myList.model.get(i).name) {
+                        for (var i = 0; i < supList.count; i++) {
+                            if (nameTextArea.text === supList.model.get(i).name) {
                                 copyrate = true
                                 break
                             }
                         }
                         if (!copyrate) {
-                            myList.model.append({
+                            supList.model.append({
                                 name: nameTextArea.text,
                                 number: numberTextArea.text
                             });
@@ -70,7 +70,7 @@ Page {
         }
         ListView {
             clip: true
-            id: myList
+            id: supList
             Layout.fillWidth: true
             spacing: 10
             anchors {
@@ -80,8 +80,7 @@ Page {
                 bottom: parent.bottom
             }
             delegate: RowLayout {
-                id: obj
-                width: myList.model.widht
+                width: supList.model.widht
                 height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                 Rectangle {
                     id: rectName
@@ -137,7 +136,14 @@ Page {
                     }
                     onClicked: {
                         appAnswer.message("Удалено!")
-                        myList.model.remove(index);
+                        supList.model.remove(index);
+                    }
+
+                    onPressed: {
+                        supList.interactive = false
+                    }
+                    onReleased: {
+                        supList.interactive = true
                     }
                 }
             }

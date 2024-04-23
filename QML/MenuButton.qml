@@ -8,6 +8,6 @@ CustomButton {
     colorButton: "#5A5A5A"
     colorText: "#E9E9E9"
     height: 44
-    width: width - 10
+    width: width - 5
     fontSize: 14
 }

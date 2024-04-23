@@ -98,7 +98,8 @@ Page {
                     height: 320
                     smooth: true
                     source: hrefFromImg
-
+                    sourceSize.width: imageGoods.height * 2
+                    sourceSize.height: imageGoods.width * 2
                     anchors {
                         left: parent.left
                         right: parent.right
