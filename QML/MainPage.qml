@@ -23,7 +23,6 @@ Page {
         } else
             appAnswer.message("Такая карточка уже существует!", true);
     }
-
     RowLayout {
         anchors.fill: parent
         Item {

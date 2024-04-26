@@ -54,7 +54,11 @@ Page {
                         if (!copyrate) {
                             supList.model.append({
                                 name: nameTextArea.text,
-                                number: numberTextArea.text
+                                number: numberTextArea.text,
+                                fontColorName: supList.count % 2 === 0 ? "black" : "#E9E9E9",
+                                rectColorName: supList.count % 2 === 0 ? "#969696" : "#646464",
+                                fontColorNumber: supList.count % 2 === 0 ? "#E9E9E9" :"black",
+                                rectColorNumber: supList.count % 2 === 0 ? "#646464" : "#969696",
                             });
                             nameTextArea.text = ""
                             numberTextArea.text = ""
@@ -79,6 +83,7 @@ Page {
                 top: createButtons.bottom
                 bottom: parent.bottom
             }
+            model: ListModel {}
             delegate: RowLayout {
                 width: supList.model.widht
                 height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
@@ -87,14 +92,14 @@ Page {
                     height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                     clip: true
                     width: nameTextArea.width
-                    color: "#646464"
+                    color: rectColorName
                     anchors {
                         left: page3.left
                     }
                     Text {
                         padding: 10
                         id: nameValue
-                        color: "#E9E9E9"
+                        color: fontColorName
                         text: name
                         font.pixelSize: fontSize
                         wrapMode: TextArea.Wrap
@@ -111,7 +116,7 @@ Page {
                     height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
                     id: rectNumber
                     width: numberTextArea.width
-                    color: "#969696"
+                    color: rectColorNumber
                     anchors {
                         left: spacerRect.right
                     }
@@ -119,7 +124,7 @@ Page {
                         padding: 10
                         id: numberValue
                         font.pixelSize: fontSize
-                        color: "black"
+                        color: fontColorNumber
                         text: number
                         wrapMode: TextArea.Wrap
                         width: parent.width
@@ -137,6 +142,12 @@ Page {
                     onClicked: {
                         appAnswer.message("Удалено!")
                         supList.model.remove(index);
+                        for (var i = 0; i < supList.count; i++) {
+                            supList.model.get(i).fontColorName = i % 2 === 0 ? "black" : "#E9E9E9"
+                            supList.model.get(i).rectColorName = i % 2 === 0 ? "#969696" : "#646464"
+                            supList.model.get(i).fontColorNumber = i % 2 === 0 ? "#E9E9E9" :"black"
+                            supList.model.get(i).rectColorNumber = i % 2 === 0 ? "#646464" : "#969696"
+                        }
                     }
 
                     onPressed: {
@@ -146,8 +157,6 @@ Page {
                         supList.interactive = true
                     }
                 }
-            }
-            model: ListModel {
             }
         }
     }

@@ -18,6 +18,10 @@ TextArea {
             description.cursorPosition = maxCharacters - 1;
         }
     }
+    Keys.onEscapePressed:{
+        description.focus = false;
+        hotKeyEscape.focus = true;
+    }
     Rectangle {
         anchors.fill: parent
         border.color: "black"

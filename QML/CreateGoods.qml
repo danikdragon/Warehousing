@@ -158,10 +158,11 @@ Page {
                 }
                 RowLayout {
                     id: buttonLayout
-
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    anchors{
+                        bottom: parent.bottom
+                        left: parent.left
+                        right: parent.right
+                    }
                     height: 40
                     spacing: 0
 

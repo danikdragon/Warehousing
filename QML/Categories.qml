@@ -49,6 +49,8 @@ Page {
                         if (!copyrate) {
                             catList.model.append({
                                 name: nameCategori.text,
+                                fontColor: catList.count % 2 === 0 ? "black" : "#E9E9E9",
+                                rectColor: catList.count % 2 === 0 ? "#969696" : "#646464",
                             });
                             nameCategori.text = ""
                             appAnswer.message("Поле создано!")
@@ -79,14 +81,14 @@ Page {
                     height: nameValue.height
                     clip: true
                     width: nameCategori.width
-                    color: "#646464"
+                    color: rectColor
                     anchors {
                         left: page3.left
                     }
                     Text {
                         padding: 10
                         id: nameValue
-                        color: "#E9E9E9"
+                        color: fontColor
                         text: name
                         font.pixelSize: fontSize
                         wrapMode: TextArea.Wrap
@@ -106,6 +108,10 @@ Page {
                     onClicked: {
                         appAnswer.message("Удалено!")
                         catList.model.remove(index);
+                        for (var i = 0; i < catList.count; i++) {
+                            catList.model.get(i).fontColor = i % 2 === 0 ? "black" : "#E9E9E9"
+                            catList.model.get(i).rectColor = i % 2 === 0 ? "#969696" : "#646464"
+                        }
                     }
                     onPressed: {
                         catList.interactive = false

@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 import Qt.labs.platform 1.1
+import QtQuick.Window 2.15
 import QtQuick.Dialogs
 import QtQuick.Effects
 
@@ -10,6 +11,10 @@ Window {
     minimumHeight: 580
     minimumWidth: 920
     title: "Warehousing"
+
+    flags: Qt.Transparent
+    color: "#00000000" // полностью прозрачный цвет
+
     visible: true
     width: 1400
     property string curentOpenFile
@@ -20,12 +25,13 @@ Window {
         suppliersId.textValue = "Поставщики";
         categoriesButton.textValue = "Категории товаров";
     }
-    // Item {
-    //     focus: true
-    //     Keys.onEscapePressed:{
-    //         undoText()
-    //     }
-    // }
+    Item {
+        id: hotKeyEscape
+        focus: true
+        Keys.onEscapePressed:{
+            undoText()
+        }
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -34,6 +40,9 @@ Window {
     RowLayout {
         anchors.fill: parent
         Rectangle {
+            // color: "#DDDDDD"
+            // color: "#c8c8c8"
+            color: "transparent"
             id: buttons
             Layout.preferredWidth: (parent.width * 0.2)
             Layout.fillWidth: true
@@ -43,9 +52,6 @@ Window {
                 bottom: parent.bottom
                 leftMargin: 2.5
             }
-            // color: "#DDDDDD"
-            color: "#c8c8c8"
-
             ColumnLayout {
                 spacing: 10
                 anchors.fill: parent
