@@ -33,5 +33,4 @@ Rectangle {
         root.color = isError ? "#D32F2F" : "#4CAF50";
         timer.start()
     }
-
 }

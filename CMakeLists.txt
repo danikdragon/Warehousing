@@ -23,6 +23,7 @@ qt_add_qml_module(appWarehousing
     URI Warehousing
     VERSION 1.0
         QML_FILES
+        QML/DropDownMenu.qml
         QML/Main.qml
         QML/MenuButton.qml
         QML/CustomButton.qml

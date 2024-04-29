@@ -11,14 +11,10 @@ Window {
     minimumHeight: 580
     minimumWidth: 920
     title: "Warehousing"
-
-    flags: Qt.Transparent
-    color: "#00000000" // полностью прозрачный цвет
-
     visible: true
     width: 1400
     property string curentOpenFile
-
+    id: mainWindow
     function undoText() {
         sv.pop();
         createId.textValue = "Создать товар";
@@ -34,6 +30,7 @@ Window {
     }
 
     Rectangle {
+        opacity : 1
         anchors.fill: parent
         color: "#c8c8c8"
     }

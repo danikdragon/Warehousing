@@ -33,7 +33,7 @@ Item {
             } else {
                 value++;
             }
-            if (interval != 50) {
+            if (interval !== 50) {
                 interval -= 50;
             }
         }

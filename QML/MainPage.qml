@@ -4,8 +4,8 @@ import QtQuick.Layouts
 
 Page {
     function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0) {
-        var copyrate = false
-        for (var i = 0; i < goods.count; i++) {
+        let copyrate = false
+        for (let i = 0; i < goods.count; i++) {
             if (title === goods.model.get(i).myTitle) {
                 copyrate = true
                 break

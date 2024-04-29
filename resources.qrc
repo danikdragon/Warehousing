@@ -4,17 +4,18 @@
         <file>../Warehousing/QML/Main.qml</file>
         <file>../Warehousing/QML/Goods.qml</file>
 
-        <!--Кастом-->
-        <file>../Warehousing/QML/CustomButton.qml</file>
-        <file>../Warehousing/QML/CustomTextArea.qml</file>
-        <file>../Warehousing/QML/MenuButton.qml</file>
-
         <!--Страницы-->
         <file>../Warehousing/QML/MainPage.qml</file>
         <file>../Warehousing/QML/CreateGoods.qml</file>
         <file>../Warehousing/QML/SuppliersPage.qml</file>
         <file>../Warehousing/QML/Categories.qml</file>
         <file>../Warehousing/QML/Answer.qml</file>
+
+        <!--Кастом-->
+        <file>../Warehousing/QML/CustomButton.qml</file>
+        <file>../Warehousing/QML/CustomTextArea.qml</file>
+        <file>../Warehousing/QML/MenuButton.qml</file>
+        <file>../Warehousing/QML/DropDownMenu.qml</file>
 
         <!--Изображения-->
         <file>../Warehousing/Images/Pc.png</file>
