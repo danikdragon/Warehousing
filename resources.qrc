@@ -18,6 +18,5 @@
 
         <!--Изображения-->
         <file>../Warehousing/Images/Pc.png</file>
-        <file>../Warehousing/Images/Search_Button.png</file>
     </qresource>
 </RCC>

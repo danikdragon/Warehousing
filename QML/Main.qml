@@ -56,48 +56,17 @@ Window {
                     color: "transparent"
                 }
 
-                RowLayout {
-                    id: searchButton
+                CustomTextArea{
+                    id: searchText
                     height: 40
-                    width: width - 5
-                    CustomTextArea{
-                        placeholderText: "Поставщик/Категория\nЗаголовок/Описание"
-                        id: searchText
-                        height: parent.height
-                        Layout.fillWidth: true
-                        maxCharacters: 80
-                        Layout.preferredWidth: parent.width
+                    anchors{
+                        left: createId.left
+                        right: createId.right
                     }
-                    MouseArea{
-                        height: 40
-                        width: 40
-                        onPressed: {
-                            imageSearch.opacity = 0.5
-                            imageSearch.height -= 5
-                            imageSearch.width -= 5
-                        }
-                        onReleased: {
-                            imageSearch.opacity = 1
-                            imageSearch.height += 5
-                            imageSearch.width += 5
-                        }
-                        onClicked:{
-                            //Тут должна быть функция которая будет изменять видимость объектов в гриде и отображать только те где есть какие либо данные
-                            //Или же можно открывать новую таблицу в которую можно добавлять товары
-                        }
-                        Image{
-                            id: imageSearch
-                            source: "qrc:/Warehousing/Images/Search_Button.png"
-                            height: parent.height
-                            width: parent.width
-                            smooth: true
-                            sourceSize.width: parent.height * 2
-                            sourceSize.height: parent.width * 2
-                            anchors.centerIn: parent
-                        }
-                    }
+                    placeholderText: "Поставщик/Категория\nЗаголовок/Описание"
+                    maxCharacters: 80
+                    Layout.preferredWidth: parent.width
                 }
-
                 MenuButton {
                     id: createId
                     textValue: "Создать товар"
