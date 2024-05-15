@@ -32,12 +32,6 @@ Page {
                 Layout.fillWidth: true
                 placeholderText: "Впишите категорию"
             }
-            DropDownMenu{
-                id: dropDown
-                height: 50
-                width: 120
-                Layout.fillWidth: true
-            }
             CustomButton {
                 Layout.fillWidth: true
                 textValue: "Cоздать"
@@ -52,12 +46,12 @@ Page {
                             }
                         }
                         if (!copyrate) {
+                            createGoodsPage.addCat(nameCategori.text)
                             catList.model.append({
                                 name: nameCategori.text,
                                 fontColor: catList.count % 2 === 0 ? "black" : "#E9E9E9",
                                 rectColor: catList.count % 2 === 0 ? "#969696" : "#646464",
                             });
-                            dropDown.addElement(nameCategori.text)
                             nameCategori.text = ""
                             appAnswer.message("Поле создано!")
                         } else {
@@ -109,6 +103,7 @@ Page {
                     height: nameValue.height
                     anchors {
                         leftMargin: 5
+                        left: rectName.right
                         right: page3.right
                     }
                     onClicked: {

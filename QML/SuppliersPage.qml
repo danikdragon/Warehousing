@@ -52,6 +52,7 @@ Page {
                             }
                         }
                         if (!copyrate) {
+                            createGoodsPage.addSup(nameTextArea.text)
                             supList.model.append({
                                 name: nameTextArea.text,
                                 number: numberTextArea.text,

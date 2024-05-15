@@ -11,10 +11,18 @@ Page {
     property int valueGoods: 0
 
     function cleareAll() {
+        textCat.text = "Выберите категорию"
+        textSup.text = "Выбери поставщика"
         titleText.text = null;
         descriptText.text = null;
         hrefFromImg = "qrc:/Warehousing/Images/Pc.png";
         valueGoods = 0;
+    }
+    function addSup(name = ""){
+        listSup.model.append({supValue: name})
+    }
+    function addCat(name = ""){
+        listCat.model.append({catValue: name})
     }
 
     anchors.fill: parent
@@ -58,6 +66,7 @@ Page {
     }
     ColumnLayout {
         anchors.fill: parent
+        id: mainArea
         Text {
             id: titlePage
             Layout.fillWidth: true
@@ -69,15 +78,14 @@ Page {
                 top: parent.top
             }
         }
-
         RowLayout {
             Layout.fillWidth: true
             anchors {
+                bottom: parent.bottom
                 top: titlePage.bottom
                 horizontalCenter: titlePage.horizontalCenter
             }
             Rectangle {
-                anchors.centerIn: parent
                 anchors.top: parent.top
                 color: "#E9E9E9"
                 height: 560
@@ -93,7 +101,6 @@ Page {
                 }
                 Image {
                     id: imageGoods
-
                     fillMode: Image.Stretch
                     height: 320
                     smooth: true
@@ -172,7 +179,6 @@ Page {
                         Layout.preferredWidth: parent.width * 0.3
                         height: parent.height
                         textValue: "Очистить"
-
                         onClicked: {
                             cleareAll();
                         }
@@ -185,7 +191,6 @@ Page {
                         fontSize: fontSize + 10
                         height: parent.height
                         textValue: "-"
-
                         onClicked: {
                             if (valueGoods !== 0) {
                                 valueGoods--;
@@ -205,7 +210,6 @@ Page {
                         Layout.preferredWidth: parent.width * 0.2
                         color: "#9E9E9E"
                         height: parent.height
-
                         Text {
                             anchors.top: parent.top
                             color: "#000000"
@@ -251,11 +255,148 @@ Page {
                         textValue: "Cоздать"
 
                         onClicked: {
+                            let cat = "None"
+                            let sup = "None"
                             if (titleText.text !== "" && descriptText.text !== "") {
-                                goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods)
+                                if(textSup.text !== "Выбери поставщика"){
+                                    sup = textSup.text
+                                }
+                                if(textCat.text !== "Выбери категорию"){
+                                    cat = textCat.text
+                                }
+                                goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods, sup, cat)
                             } else {
                                 appAnswer.message("Заполните все данные", true)
                             }
+                        }
+                    }
+                }
+            }
+            RowLayout{
+                id: dropDownLayout
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                Item{
+                    width: 200
+                    anchors{
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    ListView{
+                        visible: false
+                        id: listCat
+                        width: mouseCat.width
+                        anchors{
+                            horizontalCenter: mouseCat.horizontalCenter
+                            top: mouseCat.bottom
+                            bottom: parent.bottom
+                        }
+                        delegate: Rectangle{
+                            clip: true
+                            border.width: 1
+                            color: rectCat.color
+                            width: 200
+                            height: 50
+                            Text{
+                                id: nameCat
+                                anchors{
+                                    centerIn: parent
+                                }
+                                wrapMode: TextArea.Wrap
+                                text: catValue
+                            }
+                            MouseArea{
+                                anchors.fill: parent
+                                onClicked: {
+                                    listCat.visible = false
+                                    textCat.text = nameCat.text
+                                }
+                            }
+                        }
+                        model: ListModel{}
+                        Component.onCompleted: {
+                            addCat("None")
+                        }
+                    }
+                    MouseArea{
+                        id: mouseCat
+                        width: 200
+                        height: 50
+                        Rectangle{
+                            clip: true
+                            id: rectCat
+                            anchors.fill: parent
+                            color: "#cfcfcf"
+                            Text{
+                                id: textCat
+                                anchors.centerIn: parent
+                                text: "Выберите категорию"
+                            }
+                        }
+                        onClicked:{
+                            listCat.visible = !listCat.visible
+                        }
+                    }
+                }
+                Item {
+                    width: 200
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    ListView{
+                        visible: false
+                        id: listSup
+                        anchors{
+                            horizontalCenter: mouseSup.horizontalCenter
+                            top: mouseSup.bottom
+                            left: mouseSup.left
+                            bottom: parent.bottom
+                        }
+                        delegate: Rectangle{
+                            clip: true
+                            border.width: 1
+                            color: rectSup.color
+                            width: 200
+                            height: 50
+                            Text{
+                                id: nameSup
+                                anchors{
+                                    centerIn: parent
+                                }
+                                wrapMode: TextArea.Wrap
+                                text: supValue
+                            }
+                            MouseArea{
+                                anchors.fill: parent
+                                onClicked: {
+                                    listSup.visible = false
+                                    textSup.text = nameSup.text
+                                }
+                            }
+                        }
+                        model: ListModel{}
+                        Component.onCompleted: {
+                            addSup("None")
+                        }
+                    }
+                    MouseArea{
+                        id: mouseSup
+                        width: 200
+                        height: 50
+                        Rectangle{
+                            clip: true
+                            id: rectSup
+                            anchors.fill: parent
+                            color: "#cfcfcf"
+                            Text{
+                                id: textSup
+                                anchors.centerIn: parent
+                                text: "Выбери поставщика"
+                            }
+                        }
+                        onClicked:{
+                            listSup.visible = !listSup.visible
                         }
                     }
                 }

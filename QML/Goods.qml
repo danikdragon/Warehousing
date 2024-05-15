@@ -16,6 +16,8 @@ Item {
                                      "Память: m2me 1000gb, ssd 4tb"
     property int value: 0
     property string nameSupplier: ""
+    property string nameCategory: ""
+
 
     signal ordering()
 

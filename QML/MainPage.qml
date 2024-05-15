@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Page {
-    function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0) {
+    function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0, sup = "None", cat = "None") {
         let copyrate = false
         for (let i = 0; i < goods.count; i++) {
             if (title === goods.model.get(i).myTitle) {
@@ -16,8 +16,11 @@ Page {
                 myPath: path,
                 myTitle: title,
                 myDescript: descript,
-                myValue: newValue
+                myValue: newValue,
+                supValue: sup,
+                catValu: cat,
             });
+            //код сохранения в бд
             appAnswer.message("Карточка создана!")
             createGoodsPage.cleareAll()
         } else
@@ -47,6 +50,8 @@ Page {
                 titleText: myTitle
                 descriptionText: myDescript
                 value: myValue
+                nameSupplier: supValue
+                nameCategory: catValue
             }
             ScrollBar.vertical: ScrollBar {
                 snapMode: ScrollBar.NoSnap

@@ -15,7 +15,6 @@
         <file>../Warehousing/QML/CustomButton.qml</file>
         <file>../Warehousing/QML/CustomTextArea.qml</file>
         <file>../Warehousing/QML/MenuButton.qml</file>
-        <file>../Warehousing/QML/DropDownMenu.qml</file>
 
         <!--Изображения-->
         <file>../Warehousing/Images/Pc.png</file>
