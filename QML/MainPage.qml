@@ -3,7 +3,30 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Page {
+    function sorting(){
+        let flag = false
+        for(let i = sortGoods.count; i >= 0; i--){
+            sortGoods.model.remove(i)
+        }
+        for(let i = 0; i < goods.count; i++){
+            if( goods.model.get(i).myTitle === searchText.text ||
+                goods.model.get(i).myDescript === searchText.text ||
+                goods.model.get(i).supValue === searchText.text ||
+                goods.model.get(i).catValue === searchText.text){
+                sortGoods.model.append(goods.model.get(i))
+                flag = true
+            }
+        }
+        if(flag === false){
+            goods.visible = true
+            sortGoods.visible = false
+        }else{
+            goods.visible = false
+            sortGoods.visible = true
+        }
+    }
     function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0, sup = "None", cat = "None") {
+        appAnswer.message("Товар создан")
         let copyrate = false
         for (let i = 0; i < goods.count; i++) {
             if (title === goods.model.get(i).myTitle) {
@@ -33,39 +56,20 @@ Page {
         goods.model.get(number).myValue = newValue;
         goods.model.get(number).supValue = sup;
         goods.model.get(number).catValue = cat;
+        //код сохранения в бд
     }
     RowLayout {
         anchors.fill: parent
         Item {
             Layout.preferredWidth: goods.width * 0.019
         }
-        GridView {
+        GridGoods{
             id: goods
-            Layout.preferredWidth: parent.width * 0.8
-            Layout.fillWidth: true
-            cellWidth: 340 + parent.width * 0.019
-            cellHeight: 580
-            flow: GridView.FlowLeftToRight
-            anchors {
-                topMargin: 10
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
-            }
-            delegate: Goods {
-                anchors.topMargin: 10
-                imageSource: myPath
-                titleText: myTitle
-                descriptionText: myDescript
-                value: myValue
-                nameSupplier: supValue
-                nameCategory: catValue
-            }
-            ScrollBar.vertical: ScrollBar {
-                snapMode: ScrollBar.NoSnap
-            }
-            model: ListModel {
-            }
+            visible: true
+        }
+        GridGoods{
+            id: sortGoods
+            visible: false
         }
     }
 }

@@ -3,6 +3,13 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Item {
+    id: root
+    width: 340
+    height: 560
+    anchors {
+        topMargin: 20
+    }
+
     readonly property color blackButton: "#000000"
     readonly property color whiteButton: "#9E9E9E"
     readonly property color blackText: "#000000"
@@ -20,6 +27,7 @@ Item {
 
 
     signal ordering()
+
 
     Timer {
         property string action: '+'
@@ -40,13 +48,6 @@ Item {
             }
         }
     }
-
-    width: 340
-    height: 560
-    anchors {
-        topMargin: 20
-    }
-    id: root
     Rectangle {
         anchors.fill: parent
         color: "#E9E9E9"
@@ -129,6 +130,7 @@ Item {
                 Layout.preferredWidth: parent.width * 0.3
                 textValue: "Заказать"
                 onClicked: {
+                    root.visible = false
                     ordering();
                 }
             }

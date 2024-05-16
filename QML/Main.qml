@@ -66,6 +66,9 @@ Window {
                     placeholderText: "Поставщик/Категория\nЗаголовок/Описание"
                     maxCharacters: 80
                     Layout.preferredWidth: parent.width
+                    onTextChanged: {
+                        goodsPage.sorting();
+                    }
                 }
                 MenuButton {
                     id: createId
@@ -168,7 +171,6 @@ Window {
             initialItem: goodsPage
         }
     }
-
 
     MainPage {
         id: goodsPage

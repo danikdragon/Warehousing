@@ -3,6 +3,7 @@
         <!--Другое-->
         <file>../Warehousing/QML/Main.qml</file>
         <file>../Warehousing/QML/Goods.qml</file>
+        <file>../Warehousing/QML/GridGoods.qml</file>
 
         <!--Страницы-->
         <file>../Warehousing/QML/MainPage.qml</file>

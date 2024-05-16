@@ -18,7 +18,7 @@ TextArea {
             description.cursorPosition = maxCharacters - 1;
         }
     }
-    Keys.onEscapePressed:{
+    Keys.onEnterPressed: {
         description.focus = false;
         hotKeyEscape.focus = true;
     }

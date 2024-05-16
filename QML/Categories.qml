@@ -28,7 +28,7 @@ Page {
             }
             CustomTextArea {
                 id: nameCategori
-                font.pixelSize: fontSize
+                font.pixelSize: 16
                 Layout.fillWidth: true
                 placeholderText: "Впишите категорию"
             }
@@ -62,10 +62,8 @@ Page {
                     }
                 }
             }
-            z: 99
         }
         ListView {
-            z : 1
             id:catList
             clip: true
             Layout.fillWidth: true
@@ -92,7 +90,7 @@ Page {
                         id: nameValue
                         color: fontColor
                         text: name
-                        font.pixelSize: fontSize
+                        font.pixelSize: 16
                         wrapMode: TextArea.Wrap
                         width: parent.width
                     }

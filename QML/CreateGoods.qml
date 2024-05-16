@@ -281,7 +281,6 @@ Page {
                         Layout.preferredWidth: parent.width * 0.3
                         height: parent.height
                         textValue: "Создать"
-
                         onClicked: {
                             let cat = "None"
                             let sup = "None"
