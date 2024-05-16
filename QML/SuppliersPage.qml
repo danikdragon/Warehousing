@@ -142,8 +142,9 @@ Page {
                     }
                     onClicked: {
                         appAnswer.message("Удалено!")
+                        createGoodsPage.delSup(index)
                         supList.model.remove(index);
-                        for (var i = 0; i < supList.count; i++) {
+                        for (let i = 0; i < supList.count; i++) {
                             supList.model.get(i).fontColorName = i % 2 === 0 ? "black" : "#E9E9E9"
                             supList.model.get(i).rectColorName = i % 2 === 0 ? "#969696" : "#646464"
                             supList.model.get(i).fontColorNumber = i % 2 === 0 ? "#E9E9E9" :"black"

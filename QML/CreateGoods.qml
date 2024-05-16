@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 2.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import Qt.labs.platform
 import QtQuick.Dialogs
 import QtQuick.Effects
@@ -10,21 +10,44 @@ Page {
     property string hrefFromImg: "qrc:/Warehousing/Images/Pc.png"
     property int valueGoods: 0
 
+    property int numberOfEdit: 0
+
+    function onRedact(number = 0, t_title = "", t_href = "", t_desc = "", t_value = 0, t_sup = "", t_cat = ""){
+        createOrEditButton.textValue = "Сохранить";
+        appAnswer.message("Режим редактирования");
+
+        numberOfEdit = number;
+        titleText.text = t_title;
+        hrefFromImg = t_href;
+        descriptText.text = t_desc;
+        valueGoods = t_value;
+        textSup.text = t_sup;
+        textCat.text = t_cat;
+    }
+
     function cleareAll() {
-        textCat.text = "Выберите категорию"
+        textCat.text = "Выбери категорию"
         textSup.text = "Выбери поставщика"
         titleText.text = null;
         descriptText.text = null;
         hrefFromImg = "qrc:/Warehousing/Images/Pc.png";
         valueGoods = 0;
+        createOrEditButton.textValue = "Создать";
+        listSup.visible = false;
+        listCat.visible = false;
     }
     function addSup(name = ""){
         listSup.model.append({supValue: name})
     }
+    function delSup(number = 0){
+        listSup.model.remove(number + 1)
+    }
     function addCat(name = ""){
         listCat.model.append({catValue: name})
     }
-
+    function delCat(number = 0){
+        listCat.model.remove(number + 1)
+    }
     anchors.fill: parent
     visible: false
 
@@ -48,18 +71,16 @@ Page {
             } else {
                 valueGoods++;
             }
-            if (interval != 50) {
+            if (interval !== 50) {
                 interval -= 50;
             }
         }
     }
     FileDialog {
         id: fileDialog
-
         currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)
         nameFilters: ["Images (*.jpg *.png)"]
         title: "Выберите файл"
-
         onAccepted: {
             hrefFromImg = selectedFile;
         }
@@ -133,7 +154,6 @@ Page {
 
                     CustomTextArea {
                         id: titleText
-
                         Layout.leftMargin: 25
                         Layout.rightMargin: 25
                         font.bold: true
@@ -180,7 +200,14 @@ Page {
                         height: parent.height
                         textValue: "Очистить"
                         onClicked: {
-                            cleareAll();
+                            if(createOrEditButton.textValue === "Создать"){
+                                cleareAll();
+                            }
+                            else{
+                                cleareAll();
+                                createOrEditButton.textValue = "Сохранить"
+                            }
+
                         }
                     }
                     CustomButton {
@@ -249,24 +276,41 @@ Page {
                         }
                     }
                     CustomButton {
+                        id: createOrEditButton
                         Layout.fillWidth: true
                         Layout.preferredWidth: parent.width * 0.3
                         height: parent.height
-                        textValue: "Cоздать"
+                        textValue: "Создать"
 
                         onClicked: {
                             let cat = "None"
                             let sup = "None"
-                            if (titleText.text !== "" && descriptText.text !== "") {
-                                if(textSup.text !== "Выбери поставщика"){
-                                    sup = textSup.text
+                            if(createOrEditButton.textValue === "Создать"){
+                                if (titleText.text !== "" && descriptText.text !== "") {
+                                    if(textSup.text !== "Выбери поставщика"){
+                                        sup = textSup.text
+                                    }
+                                    if(textCat.text !== "Выбери категорию"){
+                                        cat = textCat.text
+                                    }
+                                    goodsPage.createGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat)
+                                } else {
+                                    appAnswer.message("Заполните все данные", true)
                                 }
-                                if(textCat.text !== "Выбери категорию"){
-                                    cat = textCat.text
+                            }else{
+                                if (titleText.text !== "" && descriptText.text !== "") {
+                                    if(textSup.text !== "Выбери поставщика"){
+                                        sup = textSup.text
+                                    }
+                                    if(textCat.text !== "Выбери категорию"){
+                                        cat = textCat.text
+                                    }
+                                    goodsPage.redactGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat, numberOfEdit)
+                                    mainWindow.undoText()
+                                    cleareAll()
+                                } else {
+                                    appAnswer.message("Заполните все данные", true)
                                 }
-                                goodsPage.createGoods(root.hrefFromImg, titleText.text, descriptText.text, root.valueGoods, sup, cat)
-                            } else {
-                                appAnswer.message("Заполните все данные", true)
                             }
                         }
                     }
@@ -330,7 +374,7 @@ Page {
                             Text{
                                 id: textCat
                                 anchors.centerIn: parent
-                                text: "Выберите категорию"
+                                text: "Выбери категорию"
                             }
                         }
                         onClicked:{

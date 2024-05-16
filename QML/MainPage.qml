@@ -18,13 +18,21 @@ Page {
                 myDescript: descript,
                 myValue: newValue,
                 supValue: sup,
-                catValu: cat,
+                catValue: cat,
             });
             //код сохранения в бд
             appAnswer.message("Карточка создана!")
             createGoodsPage.cleareAll()
         } else
             appAnswer.message("Такая карточка уже существует!", true);
+    }
+    function redactGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0, sup = "None", cat = "None", number = 0){
+        goods.model.get(number).myPath = path;
+        goods.model.get(number).myTitle = title;
+        goods.model.get(number).myDescript = descript;
+        goods.model.get(number).myValue = newValue;
+        goods.model.get(number).supValue = sup;
+        goods.model.get(number).catValue = cat;
     }
     RowLayout {
         anchors.fill: parent

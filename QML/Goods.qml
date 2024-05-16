@@ -142,7 +142,7 @@ Item {
                 textValue: "-"
                 fontSize: fontSize + 10
                 onClicked: {
-                    if (value != 0)
+                    if (value !== 0)
                         value--;
                 }
                 onPressed: {
@@ -205,6 +205,22 @@ Item {
                 height: parent.height
                 Layout.fillWidth: true
                 textValue: "Редактировать"
+                onClicked:{
+                    sv.push(createGoodsPage);
+                    createId.textValue = "Назад";
+                    for(let i = 0; i < goods.count; i++){
+                        if(goods.model.get(i).myTitle === titleId.text)
+                        {
+                            createGoodsPage.onRedact(i, goods.model.get(i).myTitle,
+                                goods.model.get(i).myPath,
+                                goods.model.get(i).myDescript,
+                                goods.model.get(i).myValue,
+                                goods.model.get(i).supValue,
+                                goods.model.get(i).catValue
+                            );
+                        }
+                    }
+                }
             }
         }
     }

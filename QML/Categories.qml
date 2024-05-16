@@ -108,7 +108,7 @@ Page {
                     }
                     onClicked: {
                         appAnswer.message("Удалено!")
-                        dropDown.deleteElement(index)
+                        createGoodsPage.delCat(index)
                         catList.model.remove(index);
                         for (let i = 0; i < catList.count; i++) {
                             catList.model.get(i).fontColor = i % 2 === 0 ? "black" : "#E9E9E9"
