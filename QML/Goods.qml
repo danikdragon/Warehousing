@@ -25,10 +25,6 @@ Item {
     property string nameSupplier: ""
     property string nameCategory: ""
 
-
-    signal ordering()
-
-
     Timer {
         property string action: '+'
         id: timer
@@ -130,7 +126,6 @@ Item {
                 Layout.preferredWidth: parent.width * 0.3
                 textValue: "Заказать"
                 onClicked: {
-                    root.visible = false
                     ordering();
                 }
             }
@@ -148,7 +143,7 @@ Item {
                         value--;
                 }
                 onPressed: {
-                    timer.action = '-'
+                    timer.action = textValue
                     timer.running = true
                 }
                 onReleased: {
@@ -187,13 +182,13 @@ Item {
                 colorText: blackText
                 height: parent.height
                 Layout.fillWidth: true
-                textValue: "+"
+                textValue: '+'
                 fontSize: fontSize + 10
                 onClicked: {
                     value++;
                 }
                 onPressed: {
-                    timer.action = '+'
+                    timer.action = textValue
                     timer.running = true
                 }
                 onReleased: {

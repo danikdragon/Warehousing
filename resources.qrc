@@ -11,6 +11,7 @@
         <file>../Warehousing/QML/SuppliersPage.qml</file>
         <file>../Warehousing/QML/Categories.qml</file>
         <file>../Warehousing/QML/Answer.qml</file>
+        <file>../Warehousing/QML/SuppliesPage.qml</file>
 
         <!--Кастом-->
         <file>../Warehousing/QML/CustomButton.qml</file>

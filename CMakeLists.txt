@@ -34,6 +34,7 @@ qt_add_qml_module(appWarehousing
         QML/Answer.qml
         QML/Categories.qml
         QML/GridGoods.qml
+        QML/SuppliesPage.qml
 )
 set_target_properties(appWarehousing PROPERTIES
         MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}

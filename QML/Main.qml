@@ -20,6 +20,7 @@ Window {
         createId.textValue = "Создать товар";
         suppliersId.textValue = "Поставщики";
         categoriesButton.textValue = "Категории товаров";
+        suppliesId.textValue = "Поставки";
     }
     Item {
         id: hotKeyEscape
@@ -111,7 +112,17 @@ Window {
                     }
                 }
                 MenuButton {
+                    id: suppliesId
                     textValue: "Поставки"
+                    onClicked: {
+                        if (textValue === "Поставки") {
+                            undoText();
+                            sv.push(suppliesPage);
+                            textValue = "Назад";
+                        } else {
+                            undoText();
+                        }
+                    }
                 }
 
                 MenuButton {
@@ -182,13 +193,18 @@ Window {
         anchors.fill: parent
         visible: false
     }
+    Categories{
+        id: categoriesPage
+        anchors.fill: parent
+        visible: false
+    }
     SuppliersPage {
         id: suppliers
         anchors.fill: parent
         visible: false
     }
-    Categories{
-        id: categoriesPage
+    SuppliesPage{
+        id: suppliesPage
         anchors.fill: parent
         visible: false
     }
