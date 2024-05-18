@@ -11,11 +11,14 @@ Page {
     property int valueGoods: 0
 
     property int numberOfEdit: 0
+    property  string lastSup:""
+    property  string lastName:""
 
     function onRedact(number = 0, t_title = "", t_href = "", t_desc = "", t_value = 0, t_sup = "", t_cat = ""){
         createOrEditButton.textValue = "Сохранить";
         appAnswer.message("Режим редактирования");
-
+        lastSup = t_sup;
+        lastName = t_title;
         numberOfEdit = number;
         titleText.text = t_title;
         hrefFromImg = t_href;
@@ -303,6 +306,11 @@ Page {
                                     }
                                     if(textCat.text !== "Выбери категорию"){
                                         cat = textCat.text
+                                    }
+                                    if(lastSup !== sup){
+                                        suppliesPage.startDel(lastSup,lastName)
+                                    }else{
+                                        suppliesPage.editNameProduct(lastSup,lastName,titleText.text)
                                     }
                                     goodsPage.redactGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat, numberOfEdit)
                                     mainWindow.undoText()

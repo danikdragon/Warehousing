@@ -53,6 +53,7 @@ Page {
                         }
                         if (!copyrate) {
                             createGoodsPage.addSup(nameTextArea.text)
+                            suppliesPage.addCel(nameTextArea.text, numberTextArea.text)
                             supList.model.append({
                                 name: nameTextArea.text,
                                 number: numberTextArea.text,
@@ -142,6 +143,7 @@ Page {
                     }
                     onClicked: {
                         appAnswer.message("Удалено!")
+                        suppliesPage.delCel(name)
                         createGoodsPage.delSup(index)
                         supList.model.remove(index);
                         for (let i = 0; i < supList.count; i++) {

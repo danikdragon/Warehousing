@@ -70,6 +70,7 @@ Item {
             textValue: "Удалить"
             onClicked: {
                 appAnswer.message("Удалено!")
+                suppliesPage.startDel(nameSupplier,titleText)
                 goods.model.remove(index);
                 root.visible = false;
                 root.destroy();
@@ -126,7 +127,7 @@ Item {
                 Layout.preferredWidth: parent.width * 0.3
                 textValue: "Заказать"
                 onClicked: {
-                    ordering();
+                    suppliesPage.startAdd(nameSupplier , titleText)
                 }
             }
             CustomButton {
