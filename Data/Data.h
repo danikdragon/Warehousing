@@ -5,29 +5,28 @@ using namespace std;
 
 //Структуры всех дб
 struct Supplier{
-    QString name;
-    QString number;
+    string name;
+    string number;
 };
 
 struct Category{
-    QString name;
+    string name;
 };
 
 struct Supply{
-    QString supplier;
-    QString number;
-    vector<QString> names;
+    string supplier;
+    string number;
+    vector<string> names;
     vector<int> counts;
 };
 
 struct Product{
-    QString name;
-    QString description;
-    QString href;
+    string name;
+    string description;
+    string href;
     int count;
-
-    QString supplier;
-    QString category;
+    string supplier;
+    string category;
 };
 
 //Класс
@@ -46,31 +45,28 @@ public:
     void setSupplies(vector<Supply> supplies);
     void setProducts(vector<Product> products);
 
-    void addSupplier(QString name, QString number);
-    void addCategory(QString name);
-    void addSupply(QString supplier, QString number, vector<QString> names, vector<int> counts);
-    void addProduct(QString name, QString description, QString href, int count, QString supplier, QString category);
+    void addSupplier(string name, string number);
+    void addCategory(string name);
+    void addSupply(string supplier, string number, vector<string> names, vector<int> counts);
+    void addProduct(string name, string description, string href, int count, string supplier, string category);
 
-    Supplier getSupplier(QString name);
-    Category getCategory(QString name);
-    Supply getSupply(QString supplier, QString number);
-    Product getProduct(QString name);
+    Supplier getSupplier(string name);
+    Category getCategory(string name);
+    Supply getSupply(string supplier, string number);
+    Product getProduct(string name);
 
-    void removeSupplier(QString name);
-    void removeCategory(QString name);
-    void removeSupply(QString supplier, QString number);
-    void removeProduct(QString name);
+    void removeSupplier(string name);
+    void removeCategory(string name);
+    void removeSupply(string supplier, string number);
+    void removeProduct(string name);
 
-    void editProduct(QString name, QString description, QString href, int count, QString supplier, QString category);
+    void editProduct(string name, string description, string href, int count, string supplier, string category);
 
-    //void saveProduct();
-    //void saveSupply();
-    //void saveCategory();
-    //void saveSupplier();
+    void setPath(string t_path);
 private:
     string path = "None";
     vector<Supplier> Suppliers;
-    vector<Category> categories;
+    vector<Category> Categories;
     vector<Supply> Supplies;
     vector<Product> Products;
 };

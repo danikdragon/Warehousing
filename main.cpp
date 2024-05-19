@@ -1,6 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include "nlohmann/json.hpp"
+#include "string"
+
 
 int main(int argc, char *argv[])
 {

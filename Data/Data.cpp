@@ -2,49 +2,50 @@
 #include "nlohmann/json.hpp"
 #include <fstream>
 #include "string"
-
+#include "iostream"
 using namespace std;
-using json = nlohmann::json;
 
 void Data::saveAll() {
-    json t_json = {{"Data",
-        {"Products",
-            for (int i = 0; i < Products.size(); i++) {
-                {"Name", Suppliers[i].name},
-                {"Description", Suppliers[i].description},
-                {"Href", Suppliers[i].href},
-                {"Supplies", Suppliers[i].count},
-                {"Supplier", Suppliers[i].supplier},
-                {"Category", Suppliers[i].category};
-            }
-        },
-        {"Categories",
-            for (int i = 0; i < Categories.size(); i++) {
-                {"Name", Categories[i].name};
-            }
-        },
-        {"Suppliers",
-            for (int i = 0; i < Suppliers.size(); i++) {
-                {"Name", Suppliers[i].name},
-                {"Number", Suppliers[i].number};
-            }
-        },
-        {"Supplies",
-            for (int i = 0; i < Supplies.size(); i++) {
-                {"Supplier", Supplies[i].supplier},
-                {"Number", Supplies[i].number},
-                for(int j = 0; j < Supplies[i].names.size(); j++){
-                    {"Names", Supplies[i].names[j]},
-                    {"Counts", Supplies[i].counts[j]}
-                }
-            }
+    nlohmann::json dataBase;
+    for (auto & products : Products){
+        dataBase["Data"]["Product"].push_back({{
+            {"name", products.name},
+            {"description", products.description},
+            {"href", products.href},
+            {"count", products.count},
+            {"supplier", products.supplier},
+            {"category", products.category},
+        }});
+    }
+    for (auto & categories : Categories){
+        dataBase["Data"]["Categories"].push_back({{
+            {"name", categories.name},
+        }});
+    }
+    for (int i = 0; i < Supplies.size(); i++) {
+        nlohmann::json supply;
+        supply["supplier"] = Supplies[i].supplier;
+        supply["number"] = Supplies[i].number;
+
+        for (int j = 0; j < Supplies[i].names.size(); j++) {
+            nlohmann::json detail;
+            detail["name"] = Supplies[i].names[j];
+            detail["count"] = Supplies[i].counts[j];
+            supply["goods"].push_back(detail);
         }
-    }};
+        dataBase["Data"]["Supplies"].push_back(supply);
+    }
+    for (auto & suppliers : Suppliers){
+        dataBase["Data"]["Suppliers"].push_back({{
+            {"name", suppliers.name},
+            {"number", suppliers.number},
+        }});
+    }
     ofstream file(path);
     if (!file.is_open()) {
         return;
     }
-    file << t_json.dump(4);
+    file << dataBase.dump(4);
     file.close();
 }
 void Data::load() {
@@ -52,28 +53,31 @@ void Data::load() {
     if (!file.is_open()) {
         return;
     }
-    json t_json;
+    nlohmann::json t_json;
     file >> t_json;
     file.close();
 
-    Products = t_json["Data"]["Products"];
-    Categories = t_json["Data"]["Categories"];
-    Supplies = t_json["Data"]["Supplies"];
-    Suppliers = t_json["Data"]["Suppliers"];
+    Products = static_cast<const vector<Product>>(t_json["Data"]["Products"]);
+    Categories = static_cast<const vector<Category>>(t_json["Data"]["Categories"]);
+    Supplies = static_cast<const vector<Supply>>(t_json["Data"]["Supplies"]);
+    Suppliers = static_cast<const vector<Supplier>>(t_json["Data"]["Suppliers"]);
+}
+void Data::setPath(string t_path){
+    path = t_path;
 }
 
-void Data::addSupplier(QString name, QString number) {
+void Data::addSupplier(string name, string number) {
     Supplier t_supplier;
     t_supplier.name = name;
     t_supplier.number = number;
     Suppliers.push_back(t_supplier);
 }
-void Data::addCategory(QString name) {
+void Data::addCategory(string name) {
     Category t_category;
     t_category.name = name;
-    categories.push_back(t_category);
+    Categories.push_back(t_category);
 }
-void Data::addSupply(QString supplier, QString number, vector<QString> names, vector<int> counts) {
+void Data::addSupply(string supplier, string number, vector<string> names, vector<int> counts) {
     Supply t_supply;
     t_supply.supplier = supplier;
     t_supply.number = number;
@@ -81,7 +85,7 @@ void Data::addSupply(QString supplier, QString number, vector<QString> names, ve
     t_supply.counts = counts;
     Supplies.push_back(t_supply);
 }
-void Data::addProduct(QString name, QString description, QString href, int count, QString supplier, QString category) {
+void Data::addProduct(string name, string description, string href, int count, string supplier, string category) {
     Product t_product;
     t_product.name = name;
     t_product.description = description;
@@ -92,7 +96,7 @@ void Data::addProduct(QString name, QString description, QString href, int count
     Products.push_back(t_product);
 }
 
-void Data::removeSupplier(QString name) {
+void Data::removeSupplier(string name) {
     for(int i = 0; i < Suppliers.size(); i++) {
         if(Suppliers[i].name == name) {
             Suppliers.erase(Suppliers.begin() + i);
@@ -100,15 +104,15 @@ void Data::removeSupplier(QString name) {
         }
     }
 }
-void Data::removeCategory(QString name) {
-    for(int i = 0; i < categories.size(); i++) {
-        if(categories[i].name == name) {
-            categories.erase(categories.begin() + i);
+void Data::removeCategory(string name) {
+    for(int i = 0; i < Categories.size(); i++) {
+        if(Categories[i].name == name) {
+            Categories.erase(Categories.begin() + i);
             break;
         }
     }
 }
-void Data::removeSupply(QString supplier, QString number) {
+void Data::removeSupply(string supplier, string number) {
     for(int i = 0; i < Supplies.size(); i++) {
         if(Supplies[i].supplier == supplier && Supplies[i].number == number) {
             Supplies.erase(Supplies.begin() + i);
@@ -116,7 +120,7 @@ void Data::removeSupply(QString supplier, QString number) {
         }
     }
 }
-void Data::removeProduct(QString name) {
+void Data::removeProduct(string name) {
     for(int i = 0; i < Products.size(); i++) {
         if(Products[i].name == name) {
             Products.erase(Products.begin() + i);
@@ -124,7 +128,7 @@ void Data::removeProduct(QString name) {
         }
     }
 }
-void Data::editProduct(QString name, QString description, QString href, int count, QString supplier, QString category) {
+void Data::editProduct(string name, string description, string href, int count, string supplier, string category) {
     for(int i = 0; i < Products.size(); i++) {
         if(Products[i].name == name) {
             Products[i].description = description;
@@ -141,7 +145,7 @@ vector<Supplier> Data::getSuppliers() {
     return Suppliers;
 }
 vector<Category> Data::getCategories() {
-    return categories;
+    return Categories;
 }
 vector<Supply> Data::getSupplies() {
     return Supplies;
@@ -154,7 +158,7 @@ void Data::setSuppliers(vector<Supplier> suppliers) {
     Suppliers = suppliers;
 }
 void Data::setCategories(vector<Category> categories) {
-    categories = categories;
+    Categories = categories;
 }
 void Data::setSupplies(vector<Supply> supplies) {
     Supplies = supplies;
@@ -163,59 +167,15 @@ void Data::setProducts(vector<Product> products) {
     Products = products;
 }
 
-Supplier Data::getSupplier(QString name) {
+Supplier Data::getSupplier(string name) {
     return Supplier();
 }
-Category Data::getCategory(QString name) {
+Category Data::getCategory(string name) {
     return Category();
 }
-Supply Data::getSupply(QString supplier, QString number) {
+Supply Data::getSupply(string supplier, string number) {
     return Supply();
 }
-Product Data::getProduct(QString name) {
+Product Data::getProduct(string name) {
     return Product();
 }
-
-//void Data::saveProduct() {
-//    json t_json = {
-//        {"name", Suppliers[Suppliers.back()].name},
-//        {"description", Suppliers[Suppliers.back()].description},
-//        {"href", Suppliers[Suppliers.back()].href},
-//        {"supplies", Suppliers[Suppliers.back()].count},
-//        {"supplier", Suppliers[Suppliers.back()].supplier},
-//        {"category", Suppliers[Suppliers.back()].category}
-//    };
-//    ofstream t_file(path);
-//    t_file << t_jsondump(4);
-//    t_file.close();
-//}
-//void Data::saveSupply() {
-//    json t_json = {
-//        {"supplier", Supplies[Supplies.back()].supplier},
-//        {"number", Supplies[Supplies.back()].number},
-//        for(){
-//            {"names", Supplies[Supplies.back()].names},
-//            {"counts", Supplies[Supplies.back()].counts}
-//        }
-//    };
-//    ofstream t_file(path);
-//    t_file << t_json.dump(4);
-//    t_file.close();
-//}
-//void Data::saveCategory() {
-//    json t_json = {
-//        {"name", Categories[Categories.back()].name}
-//    };
-//    ofstream t_file(path);
-//    t_file << t_jsondump(4);
-//    t_file.close();
-//}
-//void Data::saveSupplier() {
-//    json t_json = {
-//        {"name", Suppliers[Suppliers.back()].name},
-//        {"number", Suppliers[Suppliers.back()].number}
-//    };
-//    ofstream t_file(path);
-//    t_file << t_jsondump(4);
-//    t_file.close();
-//}
