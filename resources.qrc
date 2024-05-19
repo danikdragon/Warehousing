@@ -4,6 +4,7 @@
         <file>../Warehousing/QML/Main.qml</file>
         <file>../Warehousing/QML/Goods.qml</file>
         <file>../Warehousing/QML/GridGoods.qml</file>
+        <file>../Warehousing/QML/WaitingScreen.qml</file>
 
         <!--Страницы-->
         <file>../Warehousing/QML/MainPage.qml</file>

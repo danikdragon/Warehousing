@@ -12,12 +12,10 @@ qt_add_resources(RESOURCES_ADDED ${RESOURCES})
 qt_standard_project_setup()
 
 add_executable(appWarehousing
-        main.cpp ${RESOURCES_ADDED}
-        source/Suppliers.cpp
-        include/Suppliers.h
-)
+        main.cpp ${RESOURCES_ADDED})
 
 target_link_libraries(appWarehousing PUBLIC nlohmann_json::nlohmann_json)
+target_link_directories(appWarehousing PUBLIC /Data)
 
 qt_add_qml_module(appWarehousing
     URI Warehousing
@@ -35,6 +33,7 @@ qt_add_qml_module(appWarehousing
         QML/Categories.qml
         QML/GridGoods.qml
         QML/SuppliesPage.qml
+        QML/WaitingScreen.qml
 )
 set_target_properties(appWarehousing PROPERTIES
         MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
@@ -48,4 +47,4 @@ target_link_libraries(appWarehousing
         Qt6::Core
         Qt6::Qml
 )
-#add_subdirectory(include)
+#add_subdirectory(Data)

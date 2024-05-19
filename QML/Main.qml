@@ -13,7 +13,7 @@ Window {
     title: "Warehousing"
     visible: true
     width: 1400
-    property string curentOpenFile
+    property string curentOpenFile: ""
     id: mainWindow
     function undoText() {
         sv.pop();
@@ -184,26 +184,31 @@ Window {
     }
 
     MainPage {
+        WaitingScreen{}
         id: goodsPage
         anchors.fill: parent
         visible: false
     }
     CreateGoods {
+        WaitingScreen{}
         id: createGoodsPage
         anchors.fill: parent
         visible: false
     }
     Categories{
+        WaitingScreen{}
         id: categoriesPage
         anchors.fill: parent
         visible: false
     }
     SuppliersPage {
+        WaitingScreen{}
         id: suppliers
         anchors.fill: parent
         visible: false
     }
     SuppliesPage{
+        WaitingScreen{}
         id: suppliesPage
         anchors.fill: parent
         visible: false
