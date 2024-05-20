@@ -296,6 +296,7 @@ Page {
                                         cat = textCat.text
                                     }
                                     goodsPage.createGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat)
+                                    my_dataBase.addProduct( titleText.text,descriptText.text, hrefFromImg,  valueGoods, sup, cat)
                                 } else {
                                     appAnswer.message("Заполните все данные", true)
                                 }
@@ -312,6 +313,7 @@ Page {
                                     }else{
                                         suppliesPage.editNameProduct(lastSup,lastName,titleText.text)
                                     }
+                                    my_dataBase.editProduct(lastName, titleText.text,descriptText.text, hrefFromImg,  valueGoods, sup, cat)
                                     goodsPage.redactGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat, numberOfEdit)
                                     mainWindow.undoText()
                                     cleareAll()

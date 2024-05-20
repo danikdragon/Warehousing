@@ -5,8 +5,11 @@ import Qt.labs.platform
 import QtQuick.Window
 import QtQuick.Dialogs
 import QtQuick.Effects
-
+import DataBase.json 1.0
 Window {
+    DataBase {
+        id: myDatabase
+    }
     height: 680
     minimumHeight: 580
     minimumWidth: 920
@@ -138,7 +141,8 @@ Window {
                         currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
                         nameFilters: [".json"]
                         onAccepted: {
-
+                            let fileUrl = createJson.fileUrl
+                            my_dataBase.setPath(fileUrl);
                         }
                     }
                 }
@@ -153,6 +157,9 @@ Window {
                         currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
                         nameFilters: ["Data (*.json)"]
                         onAccepted: {
+                            let fileUrl = openJson.fileUrl
+                            let fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1)
+                            myDatabase.setPath(fileUrl + fileName);
                             curentOpenFile = selectedFile;
                         }
                     }

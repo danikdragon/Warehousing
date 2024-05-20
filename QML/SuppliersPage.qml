@@ -54,6 +54,9 @@ Page {
                         if (!copyrate) {
                             createGoodsPage.addSup(nameTextArea.text)
                             suppliesPage.addCel(nameTextArea.text, numberTextArea.text)
+
+                            my_dataBase.addSupplier(nameTextArea.text, numberTextArea.text)
+
                             supList.model.append({
                                 name: nameTextArea.text,
                                 number: numberTextArea.text,
@@ -143,6 +146,7 @@ Page {
                     }
                     onClicked: {
                         appAnswer.message("Удалено!")
+                        my_dataBase.removeSupplier(name)
                         suppliesPage.delCel(name)
                         createGoodsPage.delSup(index)
                         supList.model.remove(index);

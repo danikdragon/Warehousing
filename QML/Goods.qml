@@ -71,6 +71,7 @@ Item {
             onClicked: {
                 appAnswer.message("Удалено!")
                 suppliesPage.startDel(nameSupplier,titleText)
+                my_dataBase.removeProduct(nameSupplier,titleText)
                 goods.model.remove(index);
                 root.visible = false;
                 root.destroy();

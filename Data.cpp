@@ -1,8 +1,8 @@
+#pragma once
 #include "Data.h"
 #include "nlohmann/json.hpp"
 #include <fstream>
 #include "string"
-#include "iostream"
 using namespace std;
 
 void Data::saveAll() {
@@ -71,19 +71,39 @@ void Data::addSupplier(string name, string number) {
     t_supplier.name = name;
     t_supplier.number = number;
     Suppliers.push_back(t_supplier);
+    saveAll();
 }
 void Data::addCategory(string name) {
     Category t_category;
     t_category.name = name;
     Categories.push_back(t_category);
+    saveAll();
 }
-void Data::addSupply(string supplier, string number, vector<string> names, vector<int> counts) {
+void Data::addSupplys(string supplier, string number) {
     Supply t_supply;
     t_supply.supplier = supplier;
     t_supply.number = number;
-    t_supply.names = names;
-    t_supply.counts = counts;
     Supplies.push_back(t_supply);
+    saveAll();
+}
+void Data::addSupply(string supplier,string name, int count){
+    for(int i = 0; i < Supplies.size(); i++){
+        if(Supplies[i].supplier == supplier){
+            Supplies[i].names.push_back(name);
+            Supplies[i].counts.push_back(count);
+        }
+    }
+}
+void Data::removeProductSupply(string supplier, string nameProduct){
+    for(int i = 0; i < Supplies.size(); i++){
+        if(Supplies[i].supplier == supplier){
+            for(int j = 0; j < Supplies.size(); j++){
+                if(Supplies[i].names[j] == nameProduct){
+                    Supplies[i].names.erase(Supplies[i].names.begin() + j);
+                }
+            }
+        }
+    }
 }
 void Data::addProduct(string name, string description, string href, int count, string supplier, string category) {
     Product t_product;
@@ -94,12 +114,14 @@ void Data::addProduct(string name, string description, string href, int count, s
     t_product.supplier = supplier;
     t_product.category = category;
     Products.push_back(t_product);
+    saveAll();
 }
 
 void Data::removeSupplier(string name) {
     for(int i = 0; i < Suppliers.size(); i++) {
         if(Suppliers[i].name == name) {
             Suppliers.erase(Suppliers.begin() + i);
+            saveAll();
             break;
         }
     }
@@ -108,14 +130,16 @@ void Data::removeCategory(string name) {
     for(int i = 0; i < Categories.size(); i++) {
         if(Categories[i].name == name) {
             Categories.erase(Categories.begin() + i);
+            saveAll();
             break;
         }
     }
 }
-void Data::removeSupply(string supplier, string number) {
+void Data::removeSupply(string supplier) {
     for(int i = 0; i < Supplies.size(); i++) {
-        if(Supplies[i].supplier == supplier && Supplies[i].number == number) {
+        if(Supplies[i].supplier == supplier) {
             Supplies.erase(Supplies.begin() + i);
+            saveAll();
             break;
         }
     }
@@ -124,18 +148,21 @@ void Data::removeProduct(string name) {
     for(int i = 0; i < Products.size(); i++) {
         if(Products[i].name == name) {
             Products.erase(Products.begin() + i);
+            saveAll();
             break;
         }
     }
 }
-void Data::editProduct(string name, string description, string href, int count, string supplier, string category) {
+void Data::editProduct(string last_name, string name, string description, string href, int count, string supplier, string category) {
     for(int i = 0; i < Products.size(); i++) {
-        if(Products[i].name == name) {
+        if(Products[i].name == last_name) {
+            Products[i].name = name;
             Products[i].description = description;
             Products[i].href = href;
             Products[i].count = count;
             Products[i].supplier = supplier;
             Products[i].category = category;
+            saveAll();
             break;
         }
     }
@@ -153,6 +180,18 @@ vector<Supply> Data::getSupplies() {
 vector<Product> Data::getProducts() {
     return Products;
 }
+Supplier Data::getSupplier(string name) {
+    return Supplier();
+}
+Category Data::getCategory(string name) {
+    return Category();
+}
+Supply Data::getSupply(string supplier, string number) {
+    return Supply();
+}
+Product Data::getProduct(string name) {
+    return Product();
+}
 
 void Data::setSuppliers(vector<Supplier> suppliers) {
     Suppliers = suppliers;
@@ -165,17 +204,4 @@ void Data::setSupplies(vector<Supply> supplies) {
 }
 void Data::setProducts(vector<Product> products) {
     Products = products;
-}
-
-Supplier Data::getSupplier(string name) {
-    return Supplier();
-}
-Category Data::getCategory(string name) {
-    return Category();
-}
-Supply Data::getSupply(string supplier, string number) {
-    return Supply();
-}
-Product Data::getProduct(string name) {
-    return Product();
 }

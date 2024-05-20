@@ -1,9 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include "Data.h"
 #include "nlohmann/json.hpp"
-#include "string"
-
 
 int main(int argc, char *argv[])
 {
@@ -17,9 +16,12 @@ int main(int argc, char *argv[])
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
     engine.load(url);
+    Data my_dataBase;
+    // Зарегистрируйте тип, чтобы он был доступен в QML
+    qmlRegisterType<Data>("DataBase.json", 1, 0, "DataBase");
+    // Передайте объект в контекст QML
+    engine.rootContext()->setContextProperty("myData", &my_dataBase);
 
-    //Db *db = new Db();
-    //engine.rootContext()->setContextProperty("Data", db);
     return QGuiApplication::exec();
 }
 #include "main.moc"

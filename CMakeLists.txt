@@ -12,11 +12,10 @@ qt_add_resources(RESOURCES_ADDED ${RESOURCES})
 qt_standard_project_setup()
 
 add_executable(appWarehousing
-        main.cpp ${RESOURCES_ADDED}
-        Data/Data.cpp)
+        main.cpp
+        Data.cpp Data.h ${RESOURCES_ADDED})
 
 target_link_libraries(appWarehousing PUBLIC nlohmann_json::nlohmann_json)
-target_link_directories(appWarehousing PUBLIC /Data)
 
 qt_add_qml_module(appWarehousing
     URI Warehousing
@@ -48,4 +47,3 @@ target_link_libraries(appWarehousing
         Qt6::Core
         Qt6::Qml
 )
-#add_subdirectory(Data)

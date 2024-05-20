@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 MouseArea{
-    visible: mainWindow.curentOpenFile === "" ? true : false
+    visible: mainWindow.curentOpenFile === "" ? false : true
     anchors.fill: parent
     Rectangle{
         anchors.fill: parent

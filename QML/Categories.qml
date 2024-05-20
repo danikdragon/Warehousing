@@ -47,6 +47,7 @@ Page {
                         }
                         if (!copyrate) {
                             createGoodsPage.addCat(nameCategori.text)
+                            my_dataBase.addCategory(nameCategori.text)
                             catList.model.append({
                                 name: nameCategori.text,
                                 fontColor: catList.count % 2 === 0 ? "black" : "#E9E9E9",
@@ -107,6 +108,7 @@ Page {
                     onClicked: {
                         appAnswer.message("Удалено!")
                         createGoodsPage.delCat(index)
+                        my_dataBase.removeCategory(name)
                         catList.model.remove(index);
                         for (let i = 0; i < catList.count; i++) {
                             catList.model.get(i).fontColor = i % 2 === 0 ? "black" : "#E9E9E9"
