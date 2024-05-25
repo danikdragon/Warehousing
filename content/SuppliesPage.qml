@@ -26,13 +26,13 @@ Page {
     function addCel(t_name = "", t_number = "") {
         let newGoodsModel = goodsListModelComponent.createObject(root);
         suppliesList.model.append({nameSup: t_name, numberSup: t_number, goodsModel: newGoodsModel})
-        my_dataBase.addSupplys(t_name,t_number)
+        myData.addSupplys(t_name,t_number)
     }
     function delCel(t_name = "") {
         for (let i = 0; i < suppliesList.count; i++) {
             if (suppliesList.model.get(i).nameSup === t_name) {
                 suppliesList.model.remove(i)
-                my_dataBase.removeSupply(t_name)
+                myData.removeSupply(t_name)
                 break
             }
         }
@@ -44,7 +44,7 @@ Page {
                 for (let j = 0; j < goodsModel.count; j++) {
                     if (goodsModel.get(j).nameGoods === t_goodsName) {
                         goodsModel.remove(j)
-                        my_dataBase.removeProductSupply(t_name,t_goodsName)
+                        myData.removeProductSupply(t_name,t_goodsName)
                         break
                     }
                 }
@@ -60,7 +60,7 @@ Page {
                 flagOnSearch = true;
                 for (let j = 0; j < suppliesList.model.get(i).goodsModel.count; j++) {
                     if(suppliesList.model.get(i).goodsModel.get(j).nameGoods === t_goodsName){
-                        my_dataBase.addSupply(t_name)
+                        myData.addSupply(t_name)
                         flagOnCreateDuplicate = true;
                         appAnswer.message("Карточка есть в таблице заказов", true)
                         break

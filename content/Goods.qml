@@ -14,7 +14,7 @@ Item {
     readonly property color whiteButton: "#9E9E9E"
     readonly property color blackText: "#000000"
     readonly property color whiteText: "#E9E9E9"
-    property string imageSource: "qrc:/Warehousing/Images/Pc.png"
+    property string imageSource: "qrc:/qt/qml/content/image/Pc.png"
     property string titleText: "Игровой компьютер 1"
     property string descriptionText: "Видеокарта: RTX 4090ti gigabyte\n" +
                                      "Процессор: intel core i9 10500\n" +
@@ -71,7 +71,7 @@ Item {
             onClicked: {
                 appAnswer.message("Удалено!")
                 suppliesPage.startDel(nameSupplier,titleText)
-                my_dataBase.removeProduct(nameSupplier,titleText)
+                myData.removeProduct(nameSupplier,titleText)
                 goods.model.remove(index);
                 root.visible = false;
                 root.destroy();

@@ -2,14 +2,10 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Qt.labs.platform
-import QtQuick.Window
 import QtQuick.Dialogs
 import QtQuick.Effects
-import DataBase.json 1.0
+
 Window {
-    DataBase {
-        id: myDatabase
-    }
     height: 680
     minimumHeight: 580
     minimumWidth: 920
@@ -32,7 +28,6 @@ Window {
             undoText()
         }
     }
-
     Rectangle {
         opacity : 1
         anchors.fill: parent
@@ -142,10 +137,11 @@ Window {
                         nameFilters: [".json"]
                         onAccepted: {
                             let fileUrl = createJson.fileUrl
-                            my_dataBase.setPath(fileUrl);
+                            myData.setPath(fileUrl);
                         }
                     }
                 }
+
                 MenuButton {
                     textValue: "Открыть таблицу"
                     onClicked: {
@@ -157,9 +153,7 @@ Window {
                         currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
                         nameFilters: ["Data (*.json)"]
                         onAccepted: {
-                            let fileUrl = openJson.fileUrl
-                            let fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1)
-                            myDatabase.setPath(fileUrl + fileName);
+                            myData.setPath(selectedFile);
                             curentOpenFile = selectedFile;
                         }
                     }

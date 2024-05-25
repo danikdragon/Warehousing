@@ -7,7 +7,7 @@ import QtQuick.Effects
 
 Page {
     id: root
-    property string hrefFromImg: "qrc:/Warehousing/Images/Pc.png"
+    property string hrefFromImg: "qrc:/qt/qml/content/image/Pc.png"
     property int valueGoods: 0
 
     property int numberOfEdit: 0
@@ -33,7 +33,7 @@ Page {
         textSup.text = "Выбери поставщика"
         titleText.text = null;
         descriptText.text = null;
-        hrefFromImg = "qrc:/Warehousing/Images/Pc.png";
+        hrefFromImg = "qrc:/qt/qml/content/image/Pc.png";
         valueGoods = 0;
         createOrEditButton.textValue = "Создать";
         listSup.visible = false;
@@ -295,8 +295,8 @@ Page {
                                     if(textCat.text !== "Выбери категорию"){
                                         cat = textCat.text
                                     }
+                                    myData.addProduct(titleText.text,descriptText.text, hrefFromImg,  valueGoods, sup, cat)
                                     goodsPage.createGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat)
-                                    my_dataBase.addProduct( titleText.text,descriptText.text, hrefFromImg,  valueGoods, sup, cat)
                                 } else {
                                     appAnswer.message("Заполните все данные", true)
                                 }
@@ -313,7 +313,7 @@ Page {
                                     }else{
                                         suppliesPage.editNameProduct(lastSup,lastName,titleText.text)
                                     }
-                                    my_dataBase.editProduct(lastName, titleText.text,descriptText.text, hrefFromImg,  valueGoods, sup, cat)
+                                    myData.editProduct(lastName, titleText.text,descriptText.text, hrefFromImg,  valueGoods, sup, cat)
                                     goodsPage.redactGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat, numberOfEdit)
                                     mainWindow.undoText()
                                     cleareAll()
