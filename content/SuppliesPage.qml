@@ -60,7 +60,6 @@ Page {
                 flagOnSearch = true;
                 for (let j = 0; j < suppliesList.model.get(i).goodsModel.count; j++) {
                     if(suppliesList.model.get(i).goodsModel.get(j).nameGoods === t_goodsName){
-                        myData.addSupply(t_name)
                         flagOnCreateDuplicate = true;
                         appAnswer.message("Карточка есть в таблице заказов", true)
                         break
@@ -69,6 +68,7 @@ Page {
                 if(!flagOnCreateDuplicate){
                     suppliesList.model.get(i).goodsModel.append({nameGoods: t_goodsName})
                     appAnswer.message("Карточка добавлена в таблицу заказов")
+                    myData.addSupply(t_name, t_goodsName, 0)
                 }
                 break
             }
@@ -152,9 +152,11 @@ Page {
                                 if (action === '-') {
                                     if (value !== 0) {
                                         value--;
+                                        myData.removeSupplyCount(nameGoodsId.text)
                                     }
                                 } else {
                                     value++;
+                                    myData.addSupplyCount(nameGoodsId.text)
                                 }
                                 if (interval !== 50) {
                                     interval -= 50;
@@ -185,6 +187,7 @@ Page {
                                 onClicked: {
                                     if (value !== 0)
                                         value--;
+                                    myData.removeSupplyCount(nameGoodsId.text)
                                 }
                                 onPressed: {
                                     timer.action = textValue
@@ -211,6 +214,7 @@ Page {
                                 textValue: '+'
                                 onClicked: {
                                     value++;
+                                    myData.addSupplyCount(nameGoodsId.text)
                                 }
                                 onPressed: {
                                     timer.action = textValue

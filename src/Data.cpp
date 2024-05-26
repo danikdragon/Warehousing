@@ -1,7 +1,11 @@
 #include "Data.h"
 #include "nlohmann/json.hpp"
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 #include <QFile>
 #include <QTextStream>
+#include <vector>
 #include <QDebug>
 using namespace std;
 
@@ -19,17 +23,16 @@ void Data::saveAll() {
         });
     }
     for (auto & categories : Categories){
-        dataBase["Data"]["Categories"].push_back({"name", categories.name.toStdString()});
+        dataBase["Data"]["Categories"].push_back({{"name", categories.name.toStdString()}});
     }
     for (int i = 0; i < Supplies.size(); i++) {
         nlohmann::json supply;
         supply["supplier"] = Supplies[i].supplier.toStdString();
-
         for (int j = 0; j < Supplies[i].names.size(); j++) {
             nlohmann::json detail;
-            supply["goods"].push_back(detail);
             detail["count"] = Supplies[i].counts[j];
             detail["name"] = Supplies[i].names[j].toStdString();
+            supply["goods"].push_back(detail);
         }
         dataBase["Data"]["Supplies"].push_back(supply);
     }
@@ -62,21 +65,21 @@ void Data::load() {
     }
 
     QTextStream in(&file);
-    QString fileContent = in.readAll();
+    nlohmann::json t_json = nlohmann::json::parse(in.readAll().toStdString());
     file.close();
 
-    nlohmann::json t_json = nlohmann::json::parse(fileContent.toStdString());
-
-    Products = static_cast<const vector<Product>>(t_json["Data"]["Products"]);
-    Categories = static_cast<const vector<Category>>(t_json["Data"]["Categories"]);
-    Supplies = static_cast<const vector<Supply>>(t_json["Data"]["Supplies"]);
-    Suppliers = static_cast<const vector<Supplier>>(t_json["Data"]["Suppliers"]);
+    Products = static_cast<vector<Product>>(t_json["Data"]["Products"]);
+    Categories = static_cast<vector<Category>>(t_json["Data"]["Categories"]);
+    Supplies = static_cast<vector<Supply>>(t_json["Data"]["Supplies"]);
+    Suppliers = static_cast<vector<Supplier>>(t_json["Data"]["Suppliers"]);
 }
-
+void Data::createFile(){
+    QFile file(path);
+    file.close();
+}
 
 void Data::setPath(QString t_path){
     path = t_path.remove(0, 8);
-    qDebug()<< path;
 }
 
 void Data::addSupplier(QString name, QString number) {
@@ -104,6 +107,29 @@ void Data::addSupply(QString supplier,QString name, int count){
         if(Supplies[i].supplier == supplier){
             Supplies[i].names.push_back(name);
             Supplies[i].counts.push_back(count);
+        }
+    }
+    saveAll();
+}
+void Data::addSupplyCount(QString Product_name){
+    for(int i = 0; i < Supplies.size(); i++){
+        for (int j = 0; j <  Supplies[i].names.size(); ++j) {
+            if(Supplies[i].names[j] == Product_name){
+                Supplies[i].counts[j]++;
+                saveAll();
+                return;
+            }
+        }
+    }
+}
+void Data::removeSupplyCount(QString Product_name){
+    for(int i = 0; i < Supplies.size(); i++){
+        for (int j = 0; j <  Supplies[i].names.size(); ++j) {
+            if(Supplies[i].names[j] == Product_name){
+                Supplies[i].counts[j]--;
+                saveAll();
+                return;
+            }
         }
     }
 }
@@ -180,6 +206,24 @@ void Data::editProduct(QString last_name, QString name, QString description, QSt
         }
     }
 }
+void Data::addCountProduct(QString name){
+    for (int i = 0; i < Products.size(); ++i) {
+        if(Products[i].name == name){
+            Products[i].count++;
+            saveAll();
+            break;
+        }
+    }
+}
+void Data::removeCountProduct(QString name){
+    for (int i = 0; i < Products.size(); ++i) {
+        if(Products[i].name == name){
+            Products[i].count--;
+            saveAll();
+            break;
+        }
+    }
+}
 
 vector<Supplier> Data::getSuppliers() {
     return Suppliers;
@@ -193,20 +237,38 @@ vector<Supply> Data::getSupplies() {
 vector<Product> Data::getProducts() {
     return Products;
 }
-//-----------------------------------
 Supplier Data::getSupplier(QString name) {
+    for (int i = 0; i < Suppliers.size(); ++i) {
+        if(Suppliers[i].name == name){
+            return Suppliers[i];
+        }
+    }
     return Supplier();
 }
 Category Data::getCategory(QString name) {
+    for (int i = 0; i < Categories.size(); ++i) {
+        if(Categories[i].name == name){
+            return Categories[i];
+        }
+    }
     return Category();
 }
 Supply Data::getSupply(QString supplier, QString number) {
+    for (int i = 0; i < Supplies.size(); ++i) {
+        if(Supplies[i].supplier == supplier){
+            return Supplies[i];
+        }
+    }
     return Supply();
 }
 Product Data::getProduct(QString name) {
+    for (int i = 0; i < Products.size(); ++i) {
+        if(Products[i].name == name){
+            return Products[i];
+        }
+    }
     return Product();
 }
-//-----------------------------------
 void Data::setSuppliers(vector<Supplier> suppliers) {
     Suppliers = suppliers;
 }

@@ -3,7 +3,6 @@ import QtQuick.Controls
 
 TextArea {
     id: description
-    color: "#000000"
     width: 100
     height: 50
     implicitWidth: width
@@ -21,11 +20,5 @@ TextArea {
     Keys.onEnterPressed: {
         description.focus = false;
         hotKeyEscape.focus = true;
-    }
-    Rectangle {
-        anchors.fill: parent
-        border.color: "black"
-        border.width: 2
-        color: "#00000000"
     }
 }

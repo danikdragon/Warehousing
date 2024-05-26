@@ -57,13 +57,16 @@ Window {
 
                 CustomTextArea{
                     id: searchText
-                    height: 40
+                    font.bold: true
+                    font.pixelSize: 16
+                    height: 45
+
                     anchors{
                         left: createId.left
                         right: createId.right
                     }
-                    placeholderText: "Поставщик/Категория\nЗаголовок/Описание"
-                    maxCharacters: 80
+                    placeholderText: "Параметр поиска"
+                    maxCharacters: 40
                     Layout.preferredWidth: parent.width
                     onTextChanged: {
                         goodsPage.sorting();
@@ -134,10 +137,11 @@ Window {
                         title: "Выберите папку"
                         fileMode: FileDialog.SaveFile
                         currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                        nameFilters: [".json"]
+                        nameFilters: ["*.json"]
                         onAccepted: {
-                            let fileUrl = createJson.fileUrl
-                            myData.setPath(fileUrl);
+                            myData.setPath(selectedFile);
+                            myData.createFile();
+                            curentOpenFile = selectedFile;
                         }
                     }
                 }
@@ -155,6 +159,7 @@ Window {
                         onAccepted: {
                             myData.setPath(selectedFile);
                             curentOpenFile = selectedFile;
+                            myData.load();
                         }
                     }
                 }

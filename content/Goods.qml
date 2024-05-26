@@ -34,9 +34,11 @@ Item {
         onTriggered: {
             if (action === '-') {
                 if (value !== 0) {
+                    myData.removeCountProduct(titleText)
                     value--;
                 }
             } else {
+                myData.addCountProduct(titleText)
                 value++;
             }
             if (interval !== 50) {
@@ -141,8 +143,10 @@ Item {
                 textValue: "-"
                 fontSize: fontSize + 10
                 onClicked: {
-                    if (value !== 0)
+                    if (value !== 0){
                         value--;
+                        myData.removeCountProduct(titleText)
+                    }
                 }
                 onPressed: {
                     timer.action = textValue
@@ -188,6 +192,7 @@ Item {
                 fontSize: fontSize + 10
                 onClicked: {
                     value++;
+                    myData.addCountProduct(titleText)
                 }
                 onPressed: {
                     timer.action = textValue
