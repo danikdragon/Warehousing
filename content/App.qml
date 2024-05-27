@@ -6,6 +6,7 @@ import QtQuick.Dialogs
 import QtQuick.Effects
 
 Window {
+    //IconImage: "qrc:/qt/qml/content/image/icons.png"
     height: 680
     minimumHeight: 580
     minimumWidth: 920
@@ -57,10 +58,7 @@ Window {
 
                 CustomTextArea{
                     id: searchText
-                    font.bold: true
-                    font.pixelSize: 16
                     height: 45
-
                     anchors{
                         left: createId.left
                         right: createId.right

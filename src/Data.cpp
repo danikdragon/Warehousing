@@ -68,10 +68,54 @@ void Data::load() {
     nlohmann::json t_json = nlohmann::json::parse(in.readAll().toStdString());
     file.close();
 
-    Products = static_cast<vector<Product>>(t_json["Data"]["Products"]);
-    Categories = static_cast<vector<Category>>(t_json["Data"]["Categories"]);
-    Supplies = static_cast<vector<Supply>>(t_json["Data"]["Supplies"]);
-    Suppliers = static_cast<vector<Supplier>>(t_json["Data"]["Suppliers"]);
+    for(int i = 0; i < t_json["Data"]["Product"].size(); i++){
+        Product temp;
+        temp.name =  QString::fromStdString(t_json["Data"]["Product"][i]["name"]);
+        qDebug() << "Product number " << i << " name = " << temp.name;
+
+        temp.category =  QString::fromStdString(t_json["Data"]["Product"][i]["category"]);
+        temp.count =  t_json["Data"]["Product"][i]["count"];
+        temp.description =  QString::fromStdString(t_json["Data"]["Product"][i]["description"]);
+        temp.href =  QString::fromStdString(t_json["Data"]["Product"][i]["href"]);
+        temp.supplier =  QString::fromStdString(t_json["Data"]["Product"][i]["supplier"]);
+        Products.push_back(temp);
+    }
+    qDebug() << "Product done!";
+    for(int i = 0; i < t_json["Data"]["Suppliers"].size(); i++){
+        Supplier temp;
+        temp.name = QString::fromStdString(t_json["Data"]["Suppliers"][i]["name"]);
+        qDebug() << "Supplier number " << i << " name = " << temp.name;
+
+        temp.number = QString::fromStdString(t_json["Data"]["Suppliers"][i]["number"]);
+        Suppliers.push_back(temp);
+    }
+    qDebug() << "Supplier done!";
+    for(int i = 0; i < t_json["Data"]["Supplies"].size(); i++){
+        Supply temp;
+        //temp.number =QString::fromStdString(t_json["Data"]["Supplies"][i]["number"]);
+        temp.supplier = QString::fromStdString(t_json["Data"]["Supplies"][i]["supplier"]);
+        for (int j = 0; j < Suppliers.size(); ++j) {
+            if(Suppliers[i].name == temp.supplier){
+                temp.number = Suppliers[i].name;
+                break;
+            }
+        }
+        qDebug() << "Supply number " << i << " supplier = " << temp.supplier;
+
+        for(int j = 0; j < t_json["Data"]["Supplies"][i]["goods"].size(); j++){
+            temp.names.push_back(QString::fromStdString(t_json["Data"]["Supplies"][i]["goods"][j]["name"]));
+            temp.counts.push_back(t_json["Data"]["Supplies"][i]["goods"][j]["count"]);
+        }
+        Supplies.push_back(temp);
+    }
+    qDebug() << "Supply done!";
+    for(int i = 0; i < t_json["Data"]["Categories"].size(); i++){
+        Category temp;
+        temp.name = QString::fromStdString(t_json["Data"]["Categories"][i]["name"]);
+        qDebug() << "Category number " << i << " name = " << temp.name;
+        Categories.push_back(temp);
+    }
+    qDebug() << "Category done!";
 }
 void Data::createFile(){
     QFile file(path);
