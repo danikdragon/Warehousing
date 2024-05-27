@@ -8,12 +8,12 @@ Page {
         for(let i = sortGoods.count; i >= 0; i--){
             sortGoods.model.remove(i)
         }
-        for(let i = 0; i < goods.count; i++){
-            if( goods.model.get(i).myTitle === searchText.text ||
-                goods.model.get(i).myDescript === searchText.text ||
-                goods.model.get(i).supValue === searchText.text ||
-                goods.model.get(i).catValue === searchText.text){
-                sortGoods.model.append(goods.model.get(i))
+        for(let j = 0; j < goods.count; j++){
+            if( goods.model.get(j).myTitle === searchText.text ||
+                goods.model.get(j).myDescript === searchText.text ||
+                goods.model.get(j).supValue === searchText.text ||
+                goods.model.get(j).catValue === searchText.text){
+                sortGoods.model.append(goods.model.get(j))
                 flag = true
             }
         }
