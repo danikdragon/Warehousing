@@ -24,12 +24,13 @@ if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
-qt_add_executable(Warehousing src/main.cpp src/Data.cpp src/Data.h)
+qt_add_executable(Warehousing src/main.cpp src/Data.cpp src/Data.h )
 
 qt_add_resources(Warehousing "configuration"
     PREFIX "/"
     FILES
         qtquickcontrols2.conf
+        image/icon.png
 )
 
 target_link_libraries(Warehousing PUBLIC nlohmann_json::nlohmann_json)

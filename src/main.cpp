@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QIcon>
 #include "Data.h"
 #include "app_environment.h"
 #include "import_qml_components_plugins.h"
@@ -8,12 +9,13 @@
 
 int main(int argc, char *argv[])
 {
+    //""
     set_qt_environment();
 
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-
+    app.setWindowIcon(QIcon("qrc:/image/icon.png"));
     Data my_dataBase;
     engine.rootContext()->setContextProperty("myData", &my_dataBase);
 
@@ -37,8 +39,7 @@ int main(int argc, char *argv[])
         return -1;
     }
     QObject::connect(&app, &QGuiApplication::aboutToQuit, [&my_dataBase]() {
-        // Здесь вы можете закрыть файлы или выполнить другие действия перед завершением работы
-        my_dataBase.closeFiles(); // Предположим, у вас есть метод closeFiles в классе Data
+        my_dataBase.closeFiles();
         qDebug() << "Application is about to quit. Files closed.";
     });
 
