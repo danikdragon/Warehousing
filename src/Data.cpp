@@ -122,10 +122,6 @@ void Data::createFile(){
     file.close();
 }
 
-void Data::setPath(QString t_path){
-    path = t_path.remove(0, 8);
-}
-
 void Data::addSupplier(QString name, QString number) {
     Supplier t_supplier;
     t_supplier.name = name;
@@ -238,13 +234,26 @@ void Data::removeProduct(QString name) {
 }
 void Data::editProduct(QString last_name, QString name, QString description, QString href, int count, QString supplier, QString category) {
     for(int i = 0; i < Products.size(); i++) {
-        if(Products[i].name == last_name) {
+        if(Products[i].description == last_name) {
             Products[i].name = name;
             Products[i].description = description;
             Products[i].href = href;
             Products[i].count = count;
             Products[i].supplier = supplier;
             Products[i].category = category;
+            if(Products[i].name != ""){
+                for(int j = 0; j < Supplies.size(); j++){
+                    if(Supplies[j].supplier == Products[i].name){
+                        for (int k = 0; k < Supplies[j].names.size(); ++k) {
+                            if(Supplies[j].names[k] == last_name){
+                                Supplies[j].names[k] = description;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
             saveAll();
             break;
         }
@@ -269,59 +278,37 @@ void Data::removeCountProduct(QString name){
     }
 }
 
-vector<Supplier> Data::getSuppliers() {
-    return Suppliers;
+QString Data::getSupplierName(int number) {
+    return Suppliers[number].name;
 }
-vector<Category> Data::getCategories() {
-    return Categories;
+QString Data::getSupplierNumber(int number) {
+    return Suppliers[number].number;
 }
-vector<Supply> Data::getSupplies() {
-    return Supplies;
+QString Data::getCategoryName(int number) {
+    return Categories[number].name;
 }
-vector<Product> Data::getProducts() {
-    return Products;
+QString Data::getSupplyName(int number1, int number2){
+    return Supplies[number1].names[number2];
 }
-Supplier Data::getSupplier(QString name) {
-    for (int i = 0; i < Suppliers.size(); ++i) {
-        if(Suppliers[i].name == name){
-            return Suppliers[i];
-        }
-    }
-    return Supplier();
+int Data::getSupplyCount(int number1, int number2){
+    return Supplies[number1].counts[number2];
 }
-Category Data::getCategory(QString name) {
-    for (int i = 0; i < Categories.size(); ++i) {
-        if(Categories[i].name == name){
-            return Categories[i];
-        }
-    }
-    return Category();
+
+QString Data::getProductName(int number){
+    return Products[number].name;
 }
-Supply Data::getSupply(QString supplier, QString number) {
-    for (int i = 0; i < Supplies.size(); ++i) {
-        if(Supplies[i].supplier == supplier){
-            return Supplies[i];
-        }
-    }
-    return Supply();
+QString Data::getProductDescription(int number){
+    return Products[number].description;
 }
-Product Data::getProduct(QString name) {
-    for (int i = 0; i < Products.size(); ++i) {
-        if(Products[i].name == name){
-            return Products[i];
-        }
-    }
-    return Product();
+QString Data::getProductHref(int number){
+    return Products[number].href;
 }
-void Data::setSuppliers(vector<Supplier> suppliers) {
-    Suppliers = suppliers;
+int Data::getProductCount(int number){
+    return Products[number].count;
 }
-void Data::setCategories(vector<Category> categories) {
-    Categories = categories;
+QString Data::getProductSupplier(int number){
+    return Products[number].supplier;
 }
-void Data::setSupplies(vector<Supply> supplies) {
-    Supplies = supplies;
-}
-void Data::setProducts(vector<Product> products) {
-    Products = products;
+QString Data::getProductCategory(int number){
+    return Products[number].category;
 }

@@ -73,7 +73,7 @@ Item {
             onClicked: {
                 appAnswer.message("Удалено!")
                 suppliesPage.startDel(nameSupplier,titleText)
-                myData.removeProduct(nameSupplier,titleText)
+                myData.removeProduct(titleText)
                 goods.model.remove(index);
                 root.visible = false;
                 root.destroy();

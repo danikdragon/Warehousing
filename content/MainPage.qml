@@ -25,7 +25,7 @@ Page {
             sortGoods.visible = true
         }
     }
-    function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0, sup = "None", cat = "None") {
+    function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0, sup = "None", cat = "None", load = false) {
         appAnswer.message("Товар создан")
         let copyrate = false
         for (let i = 0; i < goods.count; i++) {
@@ -43,7 +43,9 @@ Page {
                 supValue: sup,
                 catValue: cat,
             });
-            //код сохранения в бд
+            if(!load){
+                myData.addProduct(title, descriptText, href, value, sup, cat)
+            }
             appAnswer.message("Карточка создана!")
             createGoodsPage.cleareAll()
         } else

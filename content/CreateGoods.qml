@@ -14,6 +14,22 @@ Page {
     property  string lastSup:""
     property  string lastName:""
 
+    function addProduct(title = "", descriptText = "", href = "", value = "",categ ="" , supp = "", load = false){
+        if (title !== "" && descriptText !== "") {
+            let cat = "None"
+            let sup = "None"
+            if(supp !== "Выбери поставщика"){
+                sup = supp
+            }
+            if(categ !== "Выбери категорию"){
+                cat = categ
+            }
+            goodsPage.createGoods(href, title, descriptText, value, sup, cat, load)
+        } else {
+            appAnswer.message("Заполните все данные", true)
+        }
+    }
+
     function onRedact(number = 0, t_title = "", t_href = "", t_desc = "", t_value = 0, t_sup = "", t_cat = ""){
         createOrEditButton.textValue = "Сохранить";
         appAnswer.message("Режим редактирования");
@@ -26,6 +42,7 @@ Page {
         valueGoods = t_value;
         textSup.text = t_sup;
         textCat.text = t_cat;
+        myData.editProduct(lastName,t_title,t_desc,t_href,t_value,t_sup,t_cat)
     }
 
     function cleareAll() {
@@ -285,42 +302,32 @@ Page {
                         height: parent.height
                         textValue: "Создать"
                         onClicked: {
-                            let cat = "None"
-                            let sup = "None"
-                            if(createOrEditButton.textValue === "Создать"){
-                                if (titleText.text !== "" && descriptText.text !== "") {
-                                    if(textSup.text !== "Выбери поставщика"){
-                                        sup = textSup.text
+                                if(createOrEditButton.textValue === "Создать"){
+                                    addProduct(titleText.text, descriptText.text, hrefFromImg, valueGoods, textCat.text, textSup.text)
+                                }else{
+                                    let cat = "None"
+                                    let sup = "None"
+                                    if (titleText.text !== "" && descriptText.text !== "") {
+                                        if(textSup.text !== "Выбери поставщика"){
+                                            sup = textSup.text
+                                        }
+                                        if(textCat.text !== "Выбери категорию"){
+                                            cat = textCat.text
+                                        }
+                                        if(lastSup !== sup){
+                                            suppliesPage.startDel(lastSup,lastName)
+                                        }else{
+                                            suppliesPage.editNameProduct(lastSup,lastName,titleText.text)
+                                        }
+                                        myData.editProduct(lastName, titleText.text, descriptText.text, hrefFromImg, valueGoods, sup, cat)
+                                        goodsPage.redactGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat, numberOfEdit)
+                                        mainWindow.undoText()
+                                        cleareAll()
+                                    } else {
+                                        appAnswer.message("Заполните все данные", true)
                                     }
-                                    if(textCat.text !== "Выбери категорию"){
-                                        cat = textCat.text
-                                    }
-                                    myData.addProduct(titleText.text,descriptText.text, hrefFromImg,  valueGoods, sup, cat)
-                                    goodsPage.createGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat)
-                                } else {
-                                    appAnswer.message("Заполните все данные", true)
                                 }
-                            }else{
-                                if (titleText.text !== "" && descriptText.text !== "") {
-                                    if(textSup.text !== "Выбери поставщика"){
-                                        sup = textSup.text
-                                    }
-                                    if(textCat.text !== "Выбери категорию"){
-                                        cat = textCat.text
-                                    }
-                                    if(lastSup !== sup){
-                                        suppliesPage.startDel(lastSup,lastName)
-                                    }else{
-                                        suppliesPage.editNameProduct(lastSup,lastName,titleText.text)
-                                    }
-                                    myData.editProduct(lastName, titleText.text,descriptText.text, hrefFromImg,  valueGoods, sup, cat)
-                                    goodsPage.redactGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat, numberOfEdit)
-                                    mainWindow.undoText()
-                                    cleareAll()
-                                } else {
-                                    appAnswer.message("Заполните все данные", true)
-                                }
-                            }
+
                         }
                     }
                 }

@@ -30,7 +30,7 @@ qt_add_resources(Warehousing "configuration"
     PREFIX "/"
     FILES
         qtquickcontrols2.conf
-        image/icon.ico
+        image/icon1.ico
 )
 
 target_link_libraries(Warehousing PUBLIC nlohmann_json::nlohmann_json)

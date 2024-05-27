@@ -23,10 +23,12 @@ Page {
             }
         }
     }
-    function addCel(t_name = "", t_number = "") {
+    function addCel(t_name = "", t_number = "", load = false) {
         let newGoodsModel = goodsListModelComponent.createObject(root);
         suppliesList.model.append({nameSup: t_name, numberSup: t_number, goodsModel: newGoodsModel})
-        myData.addSupplys(t_name,t_number)
+        if(!load){
+            myData.addSupplys(t_name,t_number)
+        }
     }
     function delCel(t_name = "") {
         for (let i = 0; i < suppliesList.count; i++) {
@@ -52,23 +54,26 @@ Page {
             }
         }
     }
-    function startAdd(t_name = "", t_goodsName = "") {
-        let flagOnCreateDuplicate = false
+    function startAdd(t_name = "", t_goodsName = "", count = 0, load = false) {
+        let duplicate = false
         let flagOnSearch = false
         for (let i = 0; i < suppliesList.count; i++) {
             if (suppliesList.model.get(i).nameSup === t_name) {
                 flagOnSearch = true;
                 for (let j = 0; j < suppliesList.model.get(i).goodsModel.count; j++) {
                     if(suppliesList.model.get(i).goodsModel.get(j).nameGoods === t_goodsName){
-                        flagOnCreateDuplicate = true;
+                        duplicate = true;
                         appAnswer.message("Карточка есть в таблице заказов", true)
                         break
                     }
                 }
-                if(!flagOnCreateDuplicate){
-                    suppliesList.model.get(i).goodsModel.append({nameGoods: t_goodsName})
+                if(!duplicate){
+                    suppliesList.model.get(i).goodsModel.append({nameGoods: t_goodsName,
+                                                                    value: count})
                     appAnswer.message("Карточка добавлена в таблицу заказов")
-                    myData.addSupply(t_name, t_goodsName, 0)
+                    if(!load){
+                        myData.addSupply(t_name, t_goodsName, count)
+                    }
                 }
                 break
             }

@@ -3,6 +3,35 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
 Page {
+    function addSuplier(name = "", number = "", load = false){
+        var copyrate = false
+        for (var i = 0; i < supList.count; i++) {
+            if (name === supList.model.get(i).name) {
+                copyrate = true
+                break
+            }
+        }
+        if (!copyrate) {
+            createGoodsPage.addSup(name)
+            suppliesPage.addCel(name, number, load)
+            if(!load){
+                myData.addSupplier(name, number)
+            }
+            supList.model.append({
+                name: name,
+                number: number,
+                fontColorName: supList.count % 2 === 0 ? "black" : "#E9E9E9",
+                rectColorName: supList.count % 2 === 0 ? "#969696" : "#646464",
+                fontColorNumber: supList.count % 2 === 0 ? "#E9E9E9" :"black",
+                rectColorNumber: supList.count % 2 === 0 ? "#646464" : "#969696",
+            });
+            appAnswer.message("Поле создано!")
+            nameTextArea.text = ""
+            numberTextArea.text = ""
+        } else {
+            appAnswer.message("Такой доставщик уже существует", true)
+        }
+    }
     property int fontSize: 16
     ColumnLayout {
         anchors {
@@ -44,33 +73,7 @@ Page {
                 id: createButton
                 onClicked: {
                     if (nameTextArea.text !== "" && numberTextArea.text !== "") {
-                        var copyrate = false
-                        for (var i = 0; i < supList.count; i++) {
-                            if (nameTextArea.text === supList.model.get(i).name) {
-                                copyrate = true
-                                break
-                            }
-                        }
-                        if (!copyrate) {
-                            createGoodsPage.addSup(nameTextArea.text)
-                            suppliesPage.addCel(nameTextArea.text, numberTextArea.text)
-
-                            myData.addSupplier(nameTextArea.text, numberTextArea.text)
-
-                            supList.model.append({
-                                name: nameTextArea.text,
-                                number: numberTextArea.text,
-                                fontColorName: supList.count % 2 === 0 ? "black" : "#E9E9E9",
-                                rectColorName: supList.count % 2 === 0 ? "#969696" : "#646464",
-                                fontColorNumber: supList.count % 2 === 0 ? "#E9E9E9" :"black",
-                                rectColorNumber: supList.count % 2 === 0 ? "#646464" : "#969696",
-                            });
-                            nameTextArea.text = ""
-                            numberTextArea.text = ""
-                            appAnswer.message("Поле создано!")
-                        } else {
-                            appAnswer.message("Такой доставщик уже существует", true)
-                        }
+                        addSuplier(nameTextArea.text,numberTextArea.text)
                     } else {
                         appAnswer.message("Заполните все поля", true)
                     }

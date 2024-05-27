@@ -13,7 +13,7 @@ Window {
     title: "Warehousing"
     visible: true
     width: 1400
-    property string curentOpenFile: ""
+    property string curentOpenFile: myData.getPath()
     id: mainWindow
     function undoText() {
         sv.pop();
@@ -158,6 +158,29 @@ Window {
                             myData.setPath(selectedFile);
                             curentOpenFile = selectedFile;
                             myData.load();
+                            for(let i = 0; i < myData.getCategoriesCount(); i++){
+                                categoriesPage.createCat(myData.getCategoryName(i), true);
+                            }
+                            for(let i = 0; i < myData.getSuppliersCount(); i++){
+                                suppliers.addSuplier(myData.getSupplierName(i),
+                                                     myData.getSupplierNumber(i),
+                                                     true)
+                                for(let j = 0; j< myData.getSuppliesCountNames(i); j++){
+                                    suppliesPage.startAdd(myData.getSupplyNameSupplier(i),
+                                                          myData.getSupplyName(i,j),
+                                                          myData.getSupplyCount(i,j),
+                                                          true)
+                                }
+                            }
+                            for(let i = 0; i < myData.getProductsCount(); i++){
+                                createGoodsPage.addProduct(myData.getProductName(i),
+                                                     myData.getProductDescription(i),
+                                                     myData.getProductHref(i),
+                                                     myData.getProductCount(i),
+                                                     myData.getProductCategory(i),
+                                                     myData.getProductSupplier(i),
+                                                     true)
+                            }
                         }
                     }
                 }

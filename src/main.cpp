@@ -4,12 +4,15 @@
 #include <QIcon>
 #include "Data.h"
 
+#include "nlohmann/json.hpp"
+#include <QFile>
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    app.setWindowIcon(QIcon(":/image/icon.ico"));
+    app.setWindowIcon(QIcon(":/image/icon1.ico"));
     Data my_dataBase;
     engine.rootContext()->setContextProperty("myData", &my_dataBase);
 
@@ -32,10 +35,47 @@ int main(int argc, char *argv[])
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
-    QObject::connect(&app, &QGuiApplication::aboutToQuit, [&my_dataBase]() {
-        my_dataBase.closeFiles();
-        qDebug() << "Application is about to quit. Files closed.";
-    });
+
+    nlohmann::json dataBase;
+    qDebug()<< "Start save";
+    for (int i = 0; i < 1000; i++){
+        dataBase["Data"]["Product"].push_back({
+            {"category", std::to_string(i)},
+                {"supplier", std::to_string(i)},
+                {"count", i},
+                {"href", "qrc:/qt/qml/content/image/Pc.png"},
+                {"description", std::to_string(i)},
+                {"name", std::to_string(i)},
+                });
+    }
+    for (int i = 0; i < 1000; i++){
+        dataBase["Data"]["Categories"].push_back({{"name", std::to_string(i)}});
+    }
+    for (int i = 0; i < 1000; i++) {
+        nlohmann::json supply;
+        supply["supplier"] = std::to_string(i);
+        for (int j = 0; j < 10; j++) {
+            nlohmann::json detail;
+            detail["count"] = j;
+            detail["name"] = std::to_string(j);
+            supply["goods"].push_back(detail);
+        }
+        dataBase["Data"]["Supplies"].push_back(supply);
+    }
+    for (int i = 0; i < 1000; i++){
+        dataBase["Data"]["Suppliers"].push_back({
+                {"number", std::to_string(i)},
+                {"name", std::to_string(i)},
+                });
+    }
+    QFile file("C:/Users/Даниил/Downloads/Новая папка/1000goods.json");
+    QTextStream out(&file);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug()<< "C:/Users/Даниил/Downloads/Новая папка/1000goods.json" << " file cant open";
+    }
+    out << QString::fromStdString(dataBase.dump(4));
+    file.close();
+    qDebug()<< "End 1000goods write";
 
     return app.exec();
 }

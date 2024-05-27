@@ -4,6 +4,35 @@ import QtQuick.Controls
 
 Page {
     id: root
+    function createCat(c_name = "", load = false){
+        if (c_name !== "") {
+            var copyrate = false
+            for (var i = 0; i < catList.count; i++) {
+                if (c_name === catList.model.get(i).name) {
+                    copyrate = true
+                    break
+                }
+            }
+            if (!copyrate) {
+                if(!load){
+                    myData.addCategory(c_name);
+                }
+                createGoodsPage.addCat(c_name)
+                catList.model.append({
+                    name: c_name,
+                    fontColor: catList.count % 2 === 0 ? "black" : "#E9E9E9",
+                    rectColor: catList.count % 2 === 0 ? "#969696" : "#646464",
+                });
+                nameCategori.text = ""
+                appAnswer.message("Поле создано!")
+            } else {
+                appAnswer.message("Такая категория уже существует", true)
+            }
+        } else {
+            appAnswer.message("Заполните все поля", true)
+        }
+    }
+
     ColumnLayout {
         anchors {
             fill: parent
@@ -37,30 +66,7 @@ Page {
                 textValue: "Cоздать"
                 id: createButton
                 onClicked: {
-                    if (nameCategori.text !== "") {
-                        var copyrate = false
-                        for (var i = 0; i < catList.count; i++) {
-                            if (nameCategori.text === catList.model.get(i).name) {
-                                copyrate = true
-                                break
-                            }
-                        }
-                        if (!copyrate) {
-                            createGoodsPage.addCat(nameCategori.text)
-                            myData.addCategory(nameCategori.text)
-                            catList.model.append({
-                                name: nameCategori.text,
-                                fontColor: catList.count % 2 === 0 ? "black" : "#E9E9E9",
-                                rectColor: catList.count % 2 === 0 ? "#969696" : "#646464",
-                            });
-                            nameCategori.text = ""
-                            appAnswer.message("Поле создано!")
-                        } else {
-                            appAnswer.message("Такая категория уже существует", true)
-                        }
-                    } else {
-                        appAnswer.message("Заполните все поля", true)
-                    }
+                    createCat(nameCategori.text);
                 }
             }
         }
@@ -76,12 +82,12 @@ Page {
                 bottom: parent.bottom
             }
             delegate: RowLayout {
-                width: catList.model.widht
+                width: catList.width
                 Rectangle {
                     id: rectName
                     height: nameValue.height
-                    clip: true
                     width: nameCategori.width
+                    clip: true
                     color: rectColor
                     anchors {
                         left: page3.left
@@ -97,6 +103,7 @@ Page {
                     }
                 }
                 CustomButton {
+                    id: deleteButton
                     textValue: "Удалить"
                     width: createButton.width
                     height: nameValue.height

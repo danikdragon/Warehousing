@@ -2,6 +2,7 @@
 #define DATA_H
 #include <QObject>
 #include <vector>
+#include <QFile>
 #include <qqml.h>
 using namespace std;
 
@@ -38,54 +39,58 @@ public:
     //file
     Q_INVOKABLE void saveAll();
     Q_INVOKABLE void load();
-    Q_INVOKABLE void setPath(QString t_path);
+    Q_INVOKABLE void setPath(QString t_path) {path = t_path.remove(0, 8);}
+    Q_INVOKABLE QString getPath() {return path;}
     Q_INVOKABLE void createFile();
 
-    //product
-    Q_INVOKABLE vector<Product> getProducts();
-    Q_INVOKABLE void setProducts(vector<Product> products);
+    //product for save
     Q_INVOKABLE void addProduct(QString name, QString description, QString href, int count, QString supplier, QString category);
-    Q_INVOKABLE Product getProduct(QString name);
     Q_INVOKABLE void removeProduct(QString name);
     Q_INVOKABLE void removeProductSupply(QString supplier, QString nameProduct);
     Q_INVOKABLE void editProduct(QString last_name, QString name, QString description, QString href, int count, QString supplier, QString category);
     Q_INVOKABLE void addCountProduct(QString name);
     Q_INVOKABLE void removeCountProduct(QString name);
+    //product for load
+    Q_INVOKABLE int getProductsCount(){ return Products.size(); }
+    Q_INVOKABLE QString getProductName(int number);
+    Q_INVOKABLE QString getProductDescription(int number);
+    Q_INVOKABLE QString getProductHref(int number);
+    Q_INVOKABLE int getProductCount(int number);
+    Q_INVOKABLE QString getProductSupplier(int number);
+    Q_INVOKABLE QString getProductCategory(int number);
 
-    //suppliers
-    Q_INVOKABLE vector<Supplier> getSuppliers();
+    //category for save
+    Q_INVOKABLE void addCategory(QString name);
+    Q_INVOKABLE void removeCategory(QString name);
+    //category for load
+    Q_INVOKABLE int getCategoriesCount(){return Categories.size();}
+    Q_INVOKABLE QString getCategoryName(int number);
+
+    //suppliers for save
     Q_INVOKABLE void addSupplier(QString name, QString number);
     Q_INVOKABLE void removeSupplier(QString name);
-    Q_INVOKABLE void setSuppliers(vector<Supplier> suppliers);
-    Q_INVOKABLE Supplier getSupplier(QString name);
+    //suppliers for load
+    Q_INVOKABLE int getSuppliersCount(){ return Suppliers.size(); };
+    Q_INVOKABLE QString getSupplierName(int numbere);
+    Q_INVOKABLE QString getSupplierNumber(int numbere);
 
-    //supplies
+    //supplies for save
     Q_INVOKABLE void removeSupplyCount(QString Product_name);
     Q_INVOKABLE void addSupplyCount(QString Product_name);
     Q_INVOKABLE void addSupplys(QString supplier, QString number);
-    Q_INVOKABLE vector<Supply> getSupplies();
-    Q_INVOKABLE void setSupplies(vector<Supply> supplies);
     Q_INVOKABLE void addSupply(QString supplier,QString name, int count);
-    Q_INVOKABLE Supply getSupply(QString supplier, QString number);
     Q_INVOKABLE void removeSupply(QString supplier);
-
-    //category
-    Q_INVOKABLE vector<Category> getCategories();
-    Q_INVOKABLE void setCategories(vector<Category> categories);
-    Q_INVOKABLE Category getCategory(QString name);
-    Q_INVOKABLE void addCategory(QString name);
-    Q_INVOKABLE void removeCategory(QString name);
-
-public slots:
-    void closeFiles() {
-        saveAll();
-        qDebug() << "Saved json in "+ path;
-    }
+    //supplies for load
+    Q_INVOKABLE int getSuppliesCount(){return Supplies.size(); }
+    Q_INVOKABLE int getSuppliesCountNames(int number){ return Supplies[number].names.size(); }
+    Q_INVOKABLE QString getSupplyName(int number1, int number2);
+    Q_INVOKABLE int getSupplyCount(int number1, int number2);
+    Q_INVOKABLE QString getSupplyNameSupplier(int number){return Supplies[number].supplier;}
 private:
     QString path = "";
-    vector<Supplier> Suppliers;
-    vector<Category> Categories;
-    vector<Supply> Supplies;
     vector<Product> Products;
+    vector<Category> Categories;
+    vector<Supplier> Suppliers;
+    vector<Supply> Supplies;
 };
 #endif
