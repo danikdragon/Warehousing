@@ -69,7 +69,7 @@ Page {
                 }
                 if(!duplicate){
                     suppliesList.model.get(i).goodsModel.append({nameGoods: t_goodsName,
-                                                                    value: count})
+                                                                    t_value: count})
                     appAnswer.message("Карточка добавлена в таблицу заказов")
                     if(!load){
                         myData.addSupply(t_name, t_goodsName, count)
@@ -157,11 +157,9 @@ Page {
                                 if (action === '-') {
                                     if (value !== 0) {
                                         value--;
-                                        myData.removeSupplyCount(nameGoodsId.text)
                                     }
                                 } else {
                                     value++;
-                                    myData.addSupplyCount(nameGoodsId.text)
                                 }
                                 if (interval !== 50) {
                                     interval -= 50;
@@ -192,7 +190,6 @@ Page {
                                 onClicked: {
                                     if (value !== 0)
                                         value--;
-                                    myData.removeSupplyCount(nameGoodsId.text)
                                 }
                                 onPressed: {
                                     timer.action = textValue
@@ -201,6 +198,7 @@ Page {
                                     suppliesList.interactive = false
                                 }
                                 onReleased: {
+                                    myData.setSupplyCount(nameGoodsId.text, t_value)
                                     timer.running = false
                                     timer.interval = 500;
                                     goodsSup.interactive = true
@@ -219,7 +217,6 @@ Page {
                                 textValue: '+'
                                 onClicked: {
                                     value++;
-                                    myData.addSupplyCount(nameGoodsId.text)
                                 }
                                 onPressed: {
                                     timer.action = textValue
@@ -228,6 +225,7 @@ Page {
                                     suppliesList.interactive = false
                                 }
                                 onReleased: {
+                                    myData.setSupplyCount(nameGoodsId.text, t_value)
                                     timer.running = false
                                     timer.interval = 500;
                                     goodsSup.interactive = true

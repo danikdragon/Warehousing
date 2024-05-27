@@ -151,28 +151,19 @@ void Data::addSupply(QString supplier,QString name, int count){
     }
     saveAll();
 }
-void Data::addSupplyCount(QString Product_name){
+
+void Data::setSupplyCount(QString Product_name, int count){
     for(int i = 0; i < Supplies.size(); i++){
         for (int j = 0; j <  Supplies[i].names.size(); ++j) {
             if(Supplies[i].names[j] == Product_name){
-                Supplies[i].counts[j]++;
+                Supplies[i].counts[j] = count;
                 saveAll();
                 return;
             }
         }
     }
 }
-void Data::removeSupplyCount(QString Product_name){
-    for(int i = 0; i < Supplies.size(); i++){
-        for (int j = 0; j <  Supplies[i].names.size(); ++j) {
-            if(Supplies[i].names[j] == Product_name){
-                Supplies[i].counts[j]--;
-                saveAll();
-                return;
-            }
-        }
-    }
-}
+
 void Data::removeProductSupply(QString supplier, QString nameProduct){
     for(int i = 0; i < Supplies.size(); i++){
         if(Supplies[i].supplier == supplier){

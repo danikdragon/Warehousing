@@ -75,8 +75,7 @@ public:
     Q_INVOKABLE QString getSupplierNumber(int numbere);
 
     //supplies for save
-    Q_INVOKABLE void removeSupplyCount(QString Product_name);
-    Q_INVOKABLE void addSupplyCount(QString Product_name);
+    Q_INVOKABLE void setSupplyCount(QString Product_name, int count);
     Q_INVOKABLE void addSupplys(QString supplier, QString number);
     Q_INVOKABLE void addSupply(QString supplier,QString name, int count);
     Q_INVOKABLE void removeSupply(QString supplier);

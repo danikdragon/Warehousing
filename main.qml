@@ -158,6 +158,7 @@ Window {
                             myData.setPath(selectedFile);
                             curentOpenFile = selectedFile;
                             myData.load();
+                            //на каждой странице сделать удаление всей таблицы
                             for(let i = 0; i < myData.getCategoriesCount(); i++){
                                 categoriesPage.createCat(myData.getCategoryName(i), true);
                             }
