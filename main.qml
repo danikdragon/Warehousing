@@ -227,7 +227,7 @@ Window {
     }
 
     MainPage {
-        //WaitingScreen{}
+        WaitingScreen{}
         id: goodsPage
         anchors.fill: parent
         visible: false
