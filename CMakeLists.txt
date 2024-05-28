@@ -15,7 +15,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(nlohmann_json)
 message(STATUS "Fetched nlohmann_json.")
-
+set(RESOURCE_FILES
+    resources.rc
+)
 set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick)
@@ -23,8 +25,11 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick)
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
+if(WIN32)
+set(GUI_TYPE WIN32)
+endif(WIN32)
 
-qt_add_executable(Warehousing src/main.cpp src/Data.cpp src/Data.h )
+qt_add_executable(Warehousing ${GUI_TYPE} ${RESOURCE_FILES} src/main.cpp src/Data.cpp src/Data.h )
 
 qt_add_resources(Warehousing "configuration"
     PREFIX "/"
@@ -34,7 +39,6 @@ qt_add_resources(Warehousing "configuration"
 )
 
 target_link_libraries(Warehousing PUBLIC nlohmann_json::nlohmann_json)
-
 target_link_libraries(Warehousing PRIVATE
     Qt6::Core
     Qt6::Gui
