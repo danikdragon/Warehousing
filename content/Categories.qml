@@ -4,6 +4,11 @@ import QtQuick.Controls
 
 Page {
     id: root
+    function clear(){
+        while(catList.count > 0){
+            catList.model.remove(0);
+        }
+    }
     function createCat(c_name = "", load = false){
         if (c_name !== "") {
             var copyrate = false

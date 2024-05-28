@@ -25,6 +25,7 @@ Page {
                 cat = categ
             }
             goodsPage.createGoods(href, title, descriptText, value, sup, cat, load)
+            cleareAll()
         } else {
             appAnswer.message("Заполните все данные", true)
         }
@@ -319,7 +320,6 @@ Page {
                                         }else{
                                             suppliesPage.editNameProduct(lastSup,lastName,titleText.text)
                                         }
-                                        myData.editProduct(lastName, titleText.text, descriptText.text, hrefFromImg, valueGoods, sup, cat)
                                         goodsPage.redactGoods(hrefFromImg, titleText.text, descriptText.text, valueGoods, sup, cat, numberOfEdit)
                                         mainWindow.undoText()
                                         cleareAll()

@@ -4,7 +4,11 @@ import QtQuick.Layouts 2.15
 
 Page {
     id: root
-
+    function clear(){
+        while(suppliesList.count > 0){
+            suppliesList.model.remove(0);
+        }
+    }
     Component {
         id: goodsListModelComponent
         ListModel {}

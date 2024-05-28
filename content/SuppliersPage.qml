@@ -3,6 +3,11 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
 Page {
+    function clear(){
+        while(supList.count > 0){
+            supList.model.remove(0);
+        }
+    }
     function addSuplier(name = "", number = "", load = false){
         var copyrate = false
         for (var i = 0; i < supList.count; i++) {

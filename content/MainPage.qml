@@ -3,6 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Page {
+    function clear(){
+        while(goods.count > 0){
+            goods.model.remove(0);
+        }
+    }
+
     function sorting(){
         let flag = false
         for(let i = sortGoods.count; i >= 0; i--){
@@ -26,7 +32,6 @@ Page {
         }
     }
     function createGoods(path = "qrc:/Warehousing/Images/Pc.png", title = " ", descript = " ", newValue = 0, sup = "None", cat = "None", load = false) {
-        appAnswer.message("Товар создан")
         let copyrate = false
         for (let i = 0; i < goods.count; i++) {
             if (title === goods.model.get(i).myTitle) {
@@ -42,9 +47,9 @@ Page {
                 myValue: newValue,
                 supValue: sup,
                 catValue: cat,
-            });
+            })
             if(!load){
-                myData.addProduct(title, descriptText, href, value, sup, cat)
+                myData.addProduct(title, descript, path, newValue, sup, cat)
             }
             appAnswer.message("Карточка создана!")
             createGoodsPage.cleareAll()
@@ -58,7 +63,6 @@ Page {
         goods.model.get(number).myValue = newValue;
         goods.model.get(number).supValue = sup;
         goods.model.get(number).catValue = cat;
-        //код сохранения в бд
     }
     RowLayout {
         anchors.fill: parent

@@ -57,7 +57,17 @@ void Data::saveAll() {
 
     qDebug()<< "End file write";
 }
+
 void Data::load() {
+
+    vector<Product> new_product;
+    Products = new_product;
+    vector<Category> new_cat;
+    Categories = new_cat;
+    vector<Supplier> new_sup;
+    Suppliers = new_sup;
+    vector<Supply> new_supply;
+    Supplies = new_supply;
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Failed to open file for reading: " << path;
