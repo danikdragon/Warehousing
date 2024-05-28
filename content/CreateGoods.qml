@@ -9,10 +9,18 @@ Page {
     id: root
     property string hrefFromImg: "qrc:/qt/qml/content/image/Pc.png"
     property int valueGoods: 0
-
     property int numberOfEdit: 0
     property  string lastSup:""
     property  string lastName:""
+
+    function clear(){
+        while(listCat.count > 0){
+            listCat.model.remove(0);
+        }
+        while(listSup.count > 0){
+            listSup.model.remove(0);
+        }
+    }
 
     function addProduct(title = "", descriptText = "", href = "", value = "",categ ="" , supp = "", load = false){
         if (title !== "" && descriptText !== "") {

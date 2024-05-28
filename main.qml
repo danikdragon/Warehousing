@@ -174,6 +174,7 @@ Window {
                             suppliers.clear();
                             suppliesPage.clear();
                             goodsPage.clear();
+                            createGoodsPage.clear();
                             for(let i = 0; i < myData.getCategoriesCount(); i++){
                                 categoriesPage.createCat(myData.getCategoryName(i), true);
                             }
