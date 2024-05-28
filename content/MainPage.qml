@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-
+import QtQuick.Effects
 Page {
     function clear(){
         while(goods.count > 0){
@@ -64,7 +64,18 @@ Page {
         goods.model.get(number).supValue = sup;
         goods.model.get(number).catValue = cat;
     }
+    MultiEffect {
+        anchors.fill: forShadow
+        source: forShadow
+        //paddingRect: Qt.rect(20, 20, 40, 30)
+        shadowEnabled: true
+        shadowColor: "#90000000"
+        shadowVerticalOffset: 8
+        shadowHorizontalOffset: 6
+        shadowBlur: 0.5
+    }
     RowLayout {
+        id: forShadow
         anchors.fill: parent
         Item {
             Layout.preferredWidth: goods.width * 0.019

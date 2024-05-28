@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
-
+import QtQuick.Effects
 Page {
     function clear(){
         while(supList.count > 0){
@@ -84,6 +84,16 @@ Page {
                     }
                 }
             }
+        }
+        MultiEffect {
+            anchors.fill: supList
+            source: supList
+            //paddingRect: Qt.rect(20, 20, 40, 30)
+            shadowEnabled: true
+            shadowColor: "#90000000"
+            shadowVerticalOffset: 4
+            shadowHorizontalOffset: 4
+            shadowBlur: 0.5
         }
         ListView {
             clip: true

@@ -35,7 +35,18 @@ Window {
         color: "#c8c8c8"
     }
     RowLayout {
+        id: rootRowMenu
         anchors.fill: parent
+        MultiEffect {
+            anchors.fill: buttons
+            source: buttons
+            //paddingRect: Qt.rect(20, 20, 40, 30)
+            shadowEnabled: true
+            shadowColor: "#90000000"
+            shadowVerticalOffset: 4
+            shadowHorizontalOffset: 4
+            shadowBlur: 0.5
+        }
         Rectangle {
             // color: "#DDDDDD"
             // color: "#c8c8c8"
@@ -50,6 +61,7 @@ Window {
                 leftMargin: 2.5
             }
             ColumnLayout {
+                id: columMenuButtons
                 spacing: 10
                 anchors.fill: parent
                 Rectangle {
@@ -215,7 +227,7 @@ Window {
     }
 
     MainPage {
-        WaitingScreen{}
+        //WaitingScreen{}
         id: goodsPage
         anchors.fill: parent
         visible: false

@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-
+import QtQuick.Effects
 MouseArea {
     width: 100
     height: 50

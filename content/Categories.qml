@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-
+import QtQuick.Effects
 Page {
     id: root
     function clear(){
@@ -74,6 +74,16 @@ Page {
                     createCat(nameCategori.text);
                 }
             }
+        }
+        MultiEffect {
+            anchors.fill: catList
+            source: catList
+            //paddingRect: Qt.rect(20, 20, 40, 30)
+            shadowEnabled: true
+            shadowColor: "#90000000"
+            shadowVerticalOffset: 4
+            shadowHorizontalOffset: 4
+            shadowBlur: 0.5
         }
         ListView {
             id:catList

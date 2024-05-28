@@ -33,6 +33,7 @@ Page {
 
     function onRedact(number = 0, t_title = "", t_href = "", t_desc = "", t_value = 0, t_sup = "", t_cat = ""){
         createOrEditButton.textValue = "Сохранить";
+        titlePage.text = "Редактирование";
         appAnswer.message("Режим редактирования");
         lastSup = t_sup;
         lastName = t_title;
@@ -54,6 +55,7 @@ Page {
         hrefFromImg = "qrc:/qt/qml/content/image/Pc.png";
         valueGoods = 0;
         createOrEditButton.textValue = "Создать";
+        titlePage.text = "Создание карточки";
         listSup.visible = false;
         listCat.visible = false;
     }
@@ -120,7 +122,18 @@ Page {
                 top: parent.top
             }
         }
+        MultiEffect {
+            anchors.fill: rowProduct
+            source: rowProduct
+            //paddingRect: Qt.rect(20, 20, 40, 30)
+            shadowEnabled: true
+            shadowColor: "#90000000"
+            shadowVerticalOffset: 4
+            shadowHorizontalOffset: 4
+            shadowBlur: 0.5
+        }
         RowLayout {
+            id: rowProduct
             Layout.fillWidth: true
             anchors {
                 bottom: parent.bottom
@@ -132,15 +145,6 @@ Page {
                 color: "#E9E9E9"
                 height: 560
                 width: 340
-                MultiEffect {
-                    source: parent
-                    anchors.fill: parent
-                    shadowColor: "#000000"
-                    shadowEnabled: true
-                    shadowBlur: 20
-                    shadowVerticalOffset: 5
-                    shadowHorizontalOffset: 10
-                }
                 Image {
                     id: imageGoods
                     fillMode: Image.Stretch
