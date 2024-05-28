@@ -97,27 +97,22 @@ Page {
                 bottom: parent.bottom
             }
             model: ListModel {}
-            delegate: RowLayout {
-                width: supList.model.widht
+            delegate: Rectangle {
+                id: rectName
                 height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
-                Rectangle {
-                    id: rectName
-                    height: nameValue.height >= numberValue.height ? nameValue.height : numberValue.height
-                    clip: true
-                    width: nameTextArea.width
-                    color: rectColorName
-                    anchors {
-                        left: page3.left
-                    }
-                    Text {
-                        padding: 10
-                        id: nameValue
-                        color: fontColorName
-                        text: name
-                        font.pixelSize: fontSize
-                        wrapMode: TextArea.Wrap
-                        width: parent.width
-                    }
+                width: nameTextArea.width
+                color: rectColorName
+                anchors {
+                    left: page3.left
+                }
+                Text {
+                    padding: 10
+                    id: nameValue
+                    color: fontColorName
+                    text: name
+                    font.pixelSize: fontSize
+                    wrapMode: TextArea.Wrap
+                    width: parent.width
                 }
                 Rectangle {
                     id: spacerRect

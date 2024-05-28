@@ -86,26 +86,22 @@ Page {
                 top: createButtons.bottom
                 bottom: parent.bottom
             }
-            delegate: RowLayout {
-                width: catList.width
-                Rectangle {
-                    id: rectName
-                    height: nameValue.height
-                    width: nameCategori.width
-                    clip: true
-                    color: rectColor
-                    anchors {
-                        left: page3.left
-                    }
-                    Text {
-                        padding: 10
-                        id: nameValue
-                        color: fontColor
-                        text: name
-                        font.pixelSize: 16
-                        wrapMode: TextArea.Wrap
-                        width: parent.width
-                    }
+            delegate: Rectangle {
+                id: rectName
+                height: nameValue.height
+                width: nameCategori.width
+                color: rectColor
+                anchors {
+                    left: catList.left
+                }
+                Text {
+                    padding: 10
+                    id: nameValue
+                    color: fontColor
+                    text: name
+                    font.pixelSize: 16
+                    wrapMode: TextArea.Wrap
+                    width: parent.width
                 }
                 CustomButton {
                     id: deleteButton
@@ -115,7 +111,6 @@ Page {
                     anchors {
                         leftMargin: 5
                         left: rectName.right
-                        right: page3.right
                     }
                     onClicked: {
                         appAnswer.message("Удалено!")
